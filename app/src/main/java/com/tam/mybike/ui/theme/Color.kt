@@ -2,10 +2,25 @@ package com.tam.mybike.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// App colors
+val Blue = Color(0xFF0066F5)
+val BlueDark = Color(0xFF222C48)
+val BluePale = Color(0xFF5A6C9E)
+val Gray = Color(0xFFA7A7A7)
+val BlackBlue = Color(0xFF121726)
+val Red = Color(0xFFFA4D56)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val BikeColors = listOf(
+    Color.White,
+    Color(0xFF3F4044),
+    Color(0xFF628A3E),
+    Red,
+    Color(0xFFD9E021),
+    Color(0xFF4895F6),
+    Color(0xFFE8A701),
+    Color(0xFF76EFF0),
+    Color(0xFFBEA089),
+    Color(0xFFF4BBFB),
+    Color(0xFF619EB3),
+    Color(0xFF664C40)
+)

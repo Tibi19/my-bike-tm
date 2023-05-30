@@ -28,7 +28,7 @@ private val DarkColorScheme = darkColorScheme(
 @Composable
 fun MyBikeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = true, // Dynamic color is available on Android 12+
+    dynamicColor: Boolean = false, // Dynamic color is available on Android 12+
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -50,6 +50,7 @@ fun MyBikeTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        shapes = DefaultRoundShapes,
         content = content
     )
 }

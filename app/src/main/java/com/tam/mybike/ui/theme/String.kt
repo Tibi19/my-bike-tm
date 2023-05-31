@@ -1,2 +1,17 @@
 package com.tam.mybike.ui.theme
 
+const val TEXT_ADD = "Add"
+const val TEXT_BIKE = "Bike"
+const val TEXT_RIDE = "Ride"
+const val TEXT_ADD_BIKE = "$TEXT_ADD $TEXT_BIKE"
+const val TEXT_ADD_RIDE = "$TEXT_ADD $TEXT_RIDE"
+const val TEXT_CLOSE = "Close"
+const val TEXT_CONNECTOR_DEFAULT = ":"
+const val TEXT_CONNECTOR_IN = " in"
+const val TEXT_SERVICE = "Service"
+const val TEXT_DISTANCE = "Distance"
+const val TEXT_DURATION = "Duration"
+const val TEXT_DATE = "Date"
+const val TEXT_EDIT = "Edit"
+const val TEXT_DELETE = "Delete"
+const val TEXT_OPTIONS = "More options"

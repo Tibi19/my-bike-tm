@@ -41,7 +41,7 @@ fun RowScope.RowTitle(
 
 @Preview
 @Composable
-fun TitlePreview() =
+private fun TitlePreview() =
     WrapHeightPreview {
         Title(
             text = "Title Text",
@@ -51,7 +51,7 @@ fun TitlePreview() =
 
 @Preview
 @Composable
-fun RowTitlePreview() =
+private fun RowTitlePreview() =
     WrapHeightPreview {
         Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
             RowTitle(

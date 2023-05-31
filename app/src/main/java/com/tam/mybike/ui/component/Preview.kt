@@ -11,10 +11,12 @@ import com.tam.mybike.ui.theme.MyBikeTheme
 import com.tam.mybike.ui.theme.WIDTH_PREVIEW
 
 @Composable
-fun ScreenPreview(content: @Composable () -> Unit) =
+fun ScreenPreview(
+    content: @Composable () -> Unit
+) =
     MyBikeTheme {
         Surface(
-            color = MaterialTheme.colorScheme.background,
+            color = MaterialTheme.colorScheme.surfaceVariant,
             contentColor = Color.White,
             modifier = Modifier
                 .fillMaxHeight()
@@ -28,7 +30,7 @@ fun ScreenPreview(content: @Composable () -> Unit) =
 fun WrapHeightPreview(content: @Composable () -> Unit) =
     MyBikeTheme {
         Surface(
-            color = MaterialTheme.colorScheme.background,
+            color = MaterialTheme.colorScheme.surfaceVariant,
             contentColor = Color.White,
             modifier = Modifier.width(WIDTH_PREVIEW)
         ) {

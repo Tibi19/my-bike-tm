@@ -11,20 +11,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tam.mybike.ui.theme.FACTOR_DISABLED_BUTTON_DARKNESS
+import com.tam.mybike.ui.theme.PADDING_X_SMALL
+import com.tam.mybike.ui.theme.TEXT_ADD_BIKE
 import com.tam.mybike.ui.theme.WEIGHT_FILL
 
 @Composable
 fun ConfirmButton(
     confirmText: String,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     onClick: () -> Unit
 ) =
     Button(
         onClick = onClick,
+        enabled = enabled,
         shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
-            contentColor = MaterialTheme.colorScheme.secondary
+            contentColor = MaterialTheme.colorScheme.secondary,
+            disabledContainerColor = MaterialTheme.colorScheme.primary
+                .run {
+                    copy(
+                        red = red * FACTOR_DISABLED_BUTTON_DARKNESS,
+                        green = green * FACTOR_DISABLED_BUTTON_DARKNESS,
+                        blue = blue * FACTOR_DISABLED_BUTTON_DARKNESS
+                    )
+                },
+            disabledContentColor = MaterialTheme.colorScheme.inversePrimary
         ),
         modifier = modifier.fillMaxWidth()
     ) {
@@ -38,11 +52,23 @@ fun ConfirmButton(
 
 @Preview
 @Composable
-fun ConfirmButtonPreview() =
+private fun ConfirmButtonPreview() =
     WrapHeightPreview {
         ConfirmButton(
-            confirmText = "Add Bike",
+            confirmText = TEXT_ADD_BIKE,
             onClick = {},
-            modifier = Modifier.padding(horizontal = 5.dp)
+            modifier = Modifier.padding(horizontal = PADDING_X_SMALL)
+        )
+    }
+
+@Preview
+@Composable
+private fun ConfirmButtonDisabledPreview() =
+    WrapHeightPreview {
+        ConfirmButton(
+            confirmText = TEXT_ADD_BIKE,
+            onClick = {},
+            enabled = false,
+            modifier = Modifier.padding(horizontal = PADDING_X_SMALL)
         )
     }

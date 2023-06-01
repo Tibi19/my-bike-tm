@@ -25,8 +25,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
-import com.tam.mybike.ui.theme.BIAS_FULL_LEFT
-import com.tam.mybike.ui.theme.BIAS_FULL_RIGHT
+import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_FULL_LEFT
+import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_FULL_RIGHT
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.SIZE_DEFAULT_SWITCH
 import com.tam.mybike.ui.theme.SIZE_DEFAULT_SWITCH_THUMB
@@ -91,7 +91,7 @@ private fun BoxScope.DefaultSwitchThumb(
     onSwitch: (isOn: Boolean) -> Unit
 ) {
     val thumbAlignmentBias by animateFloatAsState(
-        targetValue = if (isOn) BIAS_FULL_RIGHT else BIAS_FULL_LEFT
+        targetValue = if (isOn) BIAS_SWITCH_THUMB_FULL_RIGHT else BIAS_SWITCH_THUMB_FULL_LEFT
     )
     val thumbDragState = rememberDraggableState { delta ->
         val isDraggingFromChecked = delta < 0 && isOn

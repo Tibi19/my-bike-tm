@@ -15,6 +15,7 @@ import com.tam.mybike.ui.theme.FACTOR_DISABLED_BUTTON_DARKNESS
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.TEXT_ADD_BIKE
 import com.tam.mybike.ui.theme.WEIGHT_FILL
+import com.tam.mybike.ui.util.darken
 
 @Composable
 fun ConfirmButton(
@@ -31,13 +32,7 @@ fun ConfirmButton(
             containerColor = MaterialTheme.colorScheme.primary,
             contentColor = MaterialTheme.colorScheme.secondary,
             disabledContainerColor = MaterialTheme.colorScheme.primary
-                .run {
-                    copy(
-                        red = red * FACTOR_DISABLED_BUTTON_DARKNESS,
-                        green = green * FACTOR_DISABLED_BUTTON_DARKNESS,
-                        blue = blue * FACTOR_DISABLED_BUTTON_DARKNESS
-                    )
-                },
+                .darken(FACTOR_DISABLED_BUTTON_DARKNESS),
             disabledContentColor = MaterialTheme.colorScheme.inversePrimary
         ),
         modifier = modifier.fillMaxWidth()

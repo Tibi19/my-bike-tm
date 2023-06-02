@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.element
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.tam.mybike.ui.component.popup.Options
 import com.tam.mybike.ui.theme.PADDING_SMALL
 
 @Composable

@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.button
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
+import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_FULL_LEFT
 import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_FULL_RIGHT
 import com.tam.mybike.ui.theme.PADDING_X_SMALL

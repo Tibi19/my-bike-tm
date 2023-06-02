@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.text
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.tam.mybike.R
+import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.theme.GrayLight
 import com.tam.mybike.ui.theme.HEIGHT_IN_INPUT_FIELD
 import com.tam.mybike.ui.theme.PADDING_LARGE

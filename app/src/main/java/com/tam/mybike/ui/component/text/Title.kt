@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.text
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.theme.WEIGHT_FILL
 
 @Composable

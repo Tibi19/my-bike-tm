@@ -1,8 +1,7 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.element
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -18,8 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.tam.mybike.R
+import com.tam.mybike.ui.component.WrapHeightPreview
+import com.tam.mybike.ui.component.text.MediumDetails
 import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_RIDE_ICON_IMAGE
 import com.tam.mybike.ui.theme.PADDING_RIDE_ICON_INSIDE_BACKGROUND

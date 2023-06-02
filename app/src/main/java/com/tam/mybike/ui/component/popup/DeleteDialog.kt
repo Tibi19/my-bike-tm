@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.popup
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
+import com.tam.mybike.ui.component.ScreenPreview
+import com.tam.mybike.ui.component.button.ConfirmButton
 import com.tam.mybike.ui.theme.PADDING_LARGE
 import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_SMALL

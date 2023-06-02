@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.text
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -11,6 +11,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.theme.PADDING_SMALL
 import com.tam.mybike.ui.theme.TEXT_BIKE
 import com.tam.mybike.ui.theme.TEXT_CONNECTOR_DEFAULT

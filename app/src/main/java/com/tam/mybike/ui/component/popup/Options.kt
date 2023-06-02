@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+package com.tam.mybike.ui.component.popup
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.LayoutDirection
 import com.tam.mybike.R
+import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.theme.HEIGHT_OPTIONS_ITEM
 import com.tam.mybike.ui.theme.OFFSET_X_OPTIONS_ITEM_TEXT_TOWARDS_ICON
 import com.tam.mybike.ui.theme.OFFSET_X_OPTIONS_MENU

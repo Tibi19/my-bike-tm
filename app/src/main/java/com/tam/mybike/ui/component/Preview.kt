@@ -11,9 +11,7 @@ import com.tam.mybike.ui.theme.MyBikeTheme
 import com.tam.mybike.ui.theme.WIDTH_PREVIEW
 
 @Composable
-fun ScreenPreview(
-    content: @Composable () -> Unit
-) =
+fun ScreenPreview(content: @Composable () -> Unit) =
     MyBikeTheme {
         Surface(
             color = MaterialTheme.colorScheme.surfaceVariant,

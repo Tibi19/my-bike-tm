@@ -26,5 +26,6 @@ const val TEXT_HOURS = "Hours"
 const val TEXT_MINUTES = "Minutes"
 const val TEXT_DURATION_DESCRIPTION_HOURS = "h, "
 const val TEXT_DURATION_DESCRIPTION_MINUTES = "min"
+const val TEXT_EXTEND_FIELD_CHOICES = "Extend to select from choices for this field"
 
 const val PATTERN_DATE = "dd.MM.uuuu"

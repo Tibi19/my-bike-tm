@@ -128,7 +128,7 @@ private fun RideDetails.toIntroAndDescriptionPairs() =
 
 @Preview
 @Composable
-fun RideSectionPreview() =
+private fun RideSectionPreview() =
     WrapHeightPreview {
         RideElementBox(
             rideDetails = RideDetails(

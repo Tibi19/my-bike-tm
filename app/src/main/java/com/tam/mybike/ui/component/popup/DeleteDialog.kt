@@ -66,7 +66,7 @@ fun DeleteDialog(
 
 @Preview
 @Composable
-fun DeleteDialogPreview() =
+private fun DeleteDialogPreview() =
     ScreenPreview {
         val isOpenState = remember { mutableStateOf(true) }
         DeleteDialog(

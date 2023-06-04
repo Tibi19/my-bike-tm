@@ -161,7 +161,7 @@ fun InputField(
 
 @Preview
 @Composable
-fun InputFieldPreview() =
+private fun InputFieldPreview() =
     WrapHeightPreview {
         InputField(
             value = "60",
@@ -174,7 +174,7 @@ fun InputFieldPreview() =
 
 @Preview
 @Composable
-fun InputFieldWithTrailingTextPreview() =
+private fun InputFieldWithTrailingTextPreview() =
     WrapHeightPreview {
         InputField(
             value = "60",

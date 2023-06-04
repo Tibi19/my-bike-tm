@@ -59,7 +59,7 @@ fun Options(
 
         DropdownMenu(
             expanded = isMenuExpanded,
-            onDismissRequest = { isMenuExpanded = !isMenuExpanded },
+            onDismissRequest = { isMenuExpanded = false },
             offset = DpOffset(x = OFFSET_X_OPTIONS_MENU, y = OFFSET_Y_OPTIONS_MENU),
             modifier = Modifier.background(color = MaterialTheme.colorScheme.tertiary)
         ) {
@@ -119,7 +119,7 @@ private fun OptionsItem(
 
 @Preview
 @Composable
-fun OptionsPreview() =
+private fun OptionsPreview() =
     WrapHeightPreview {
         Options(
             onEditMenuOption = {},

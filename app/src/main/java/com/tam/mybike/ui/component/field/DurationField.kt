@@ -59,10 +59,3 @@ fun DurationField(
         durationState = durationState
     )
 }
-
-@Preview
-@Composable
-fun DurationFieldPreview() =
-    WrapHeightPreview {
-
-    }

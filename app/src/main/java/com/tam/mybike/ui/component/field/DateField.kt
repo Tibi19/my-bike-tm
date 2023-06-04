@@ -61,7 +61,7 @@ fun DateField(
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun DateFieldPreview() =
+private fun DateFieldPreview() =
     WrapHeightPreview {
         val dateState = rememberDatePickerState(initialSelectedDateMillis = System.currentTimeMillis())
         DateField(

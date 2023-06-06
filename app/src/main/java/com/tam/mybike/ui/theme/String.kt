@@ -27,5 +27,8 @@ const val TEXT_MINUTES = "Minutes"
 const val TEXT_DURATION_DESCRIPTION_HOURS = "h, "
 const val TEXT_DURATION_DESCRIPTION_MINUTES = "min"
 const val TEXT_EXTEND_FIELD_CHOICES = "Extend to select from choices for this field"
+const val TEXT_UNDER_BIKE_CONTENT = "The wheels of the bike."
+const val TEXT_MIDDLE_BIKE_CONTENT = "The bike frame."
+const val TEXT_OVER_BIKE_CONTENT = "The bike's seat, handle and paddles"
 
 const val PATTERN_DATE = "dd.MM.uuuu"

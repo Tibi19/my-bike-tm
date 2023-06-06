@@ -35,13 +35,17 @@ private val RANGE_MINUTES = 0..59
 @Composable
 fun DurationDialog(
     isOpenState: MutableState<Boolean>,
-    durationState: MutableState<DurationState>
+    durationState: MutableState<DurationState>,
+    onClose: () -> Unit = {}
 ) {
     if (!isOpenState.value) return
 
     val hoursState = remember { mutableStateOf(durationState.value.hours) }
     val minutesState = remember { mutableStateOf(durationState.value.minutes) }
-    Dialog(onDismissRequest = { isOpenState.value = false }) {
+    Dialog(onDismissRequest = {
+        isOpenState.value = false
+        onClose()
+    }) {
         Card(
             colors = CardDefaults.cardColors(
                 containerColor = MaterialTheme.colorScheme.background
@@ -66,8 +70,12 @@ fun DurationDialog(
                             hours = hoursState.value,
                             minutes = minutesState.value
                         )
+                        onClose()
                     },
-                    onClose = { isOpenState.value = false },
+                    onClose = {
+                        isOpenState.value = false
+                        onClose()
+                    },
                     modifier = Modifier.padding(
                         top = PADDING_MEDIUM,
                         start = PADDING_LARGE,

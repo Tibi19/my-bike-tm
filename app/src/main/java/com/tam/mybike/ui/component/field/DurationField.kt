@@ -9,9 +9,8 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.component.popup.DurationDialog
 import com.tam.mybike.ui.theme.BlueGray
 import com.tam.mybike.ui.theme.TEXT_DURATION
@@ -23,7 +22,17 @@ data class DurationState(
     val minutes: Int
 ) {
     override fun toString(): String =
-        "$hours$TEXT_DURATION_DESCRIPTION_HOURS$minutes$TEXT_DURATION_DESCRIPTION_MINUTES"
+        if (isEmpty()) {
+            ""
+        } else {
+            "$hours$TEXT_DURATION_DESCRIPTION_HOURS$minutes$TEXT_DURATION_DESCRIPTION_MINUTES"
+        }
+
+    fun isEmpty(): Boolean = hours == 0 && minutes == 0
+
+    companion object {
+        val empty = DurationState(0, 0)
+    }
 }
 
 @Composable
@@ -33,8 +42,11 @@ fun DurationField(
     isRequired: Boolean = true,
 ) {
     val isDurationPickerOpenState = remember { mutableStateOf(false) }
+    var isAlertOn by remember { mutableStateOf(false) }
     val borderColor by animateColorAsState(
-        targetValue = if (isDurationPickerOpenState.value) {
+        targetValue = if (isAlertOn) {
+            MaterialTheme.colorScheme.error
+        } else if (isDurationPickerOpenState.value) {
             MaterialTheme.colorScheme.inversePrimary
         } else {
             BlueGray
@@ -51,11 +63,14 @@ fun DurationField(
             onClick = { isDurationPickerOpenState.value = true },
             borderColor = borderColor
         )
-        FieldSupportText(isAlertOn = false)
+        FieldSupportText(isAlertOn = isAlertOn)
     }
 
     DurationDialog(
         isOpenState = isDurationPickerOpenState,
-        durationState = durationState
+        durationState = durationState,
+        onClose = {
+            isAlertOn = durationState.value.isEmpty()
+        }
     )
 }

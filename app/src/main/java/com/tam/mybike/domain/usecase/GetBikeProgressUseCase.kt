@@ -1,0 +1,27 @@
+package com.tam.mybike.domain.usecase
+
+import com.tam.mybike.domain.model.Bike
+import com.tam.mybike.domain.model.Distance
+import com.tam.mybike.domain.model.DistanceUnit
+import javax.inject.Inject
+
+private const val MAX_PROGRESS_DISTANCE_KM = 1000
+private const val PROGRESS_MIN = 0f
+private const val PROGRESS_MAX = 1f
+
+class GetBikeProgressUseCase @Inject constructor(
+    private val unitConverterUseCase: UnitConverterUseCase
+) {
+
+    operator fun invoke(bike: Bike): Float {
+        val serviceIn = unitConverterUseCase(bike.serviceIn)
+        val maxProgressDistanceKm = Distance(
+            amount = MAX_PROGRESS_DISTANCE_KM,
+            unit = DistanceUnit.KM
+        )
+        val maxProgressDistance = unitConverterUseCase(maxProgressDistanceKm)
+        val progress = serviceIn.amount.toFloat() / maxProgressDistance.amount.toFloat()
+        return progress.coerceIn(PROGRESS_MIN, PROGRESS_MAX)
+    }
+
+}

@@ -1,5 +1,6 @@
 package com.tam.mybike.ui.component.button
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -23,26 +24,21 @@ fun AddButton(
     elementTitle: String,
     modifier: Modifier = Modifier,
     onClick: () -> Unit
-) =
-    TextButton(
-        onClick = onClick,
-        modifier = modifier,
-        colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.secondary)
+) {
+    val addText = "$TEXT_ADD $elementTitle"
+    Row(
+        modifier = modifier.clickable(onClick = onClick)
     ) {
-        val addText = "$TEXT_ADD $elementTitle"
-        // TextButton RowScope automatically centers items vertically, resulting in a bad alignment
-        // So we create our own Row for control over alignment
-        Row {
-            Icon(
-                painter = painterResource(id = R.drawable.icon_add),
-                contentDescription = addText
-            )
-            Text(
-                text = addText,
-                style = MaterialTheme.typography.headlineMedium,
-            )
-        }
+        Icon(
+            painter = painterResource(id = R.drawable.icon_add),
+            contentDescription = addText
+        )
+        Text(
+            text = addText,
+            style = MaterialTheme.typography.headlineMedium,
+        )
     }
+}
 
 @Preview
 @Composable

@@ -30,5 +30,10 @@ const val TEXT_EXTEND_FIELD_CHOICES = "Extend to select from choices for this fi
 const val TEXT_UNDER_BIKE_CONTENT = "The wheels of the bike."
 const val TEXT_MIDDLE_BIKE_CONTENT = "The bike frame."
 const val TEXT_OVER_BIKE_CONTENT = "The bike's seat, handle and paddles"
+const val TEXT_BIKES = "Bikes"
+const val TEXT_WHEELS = "Wheels"
+const val TEXT_INCHES_NOTATION = "\""
+const val TEXT_KM_UNIT = "km"
+const val TEXT_MI_UNIT = "mi"
 
 const val PATTERN_DATE = "dd.MM.uuuu"

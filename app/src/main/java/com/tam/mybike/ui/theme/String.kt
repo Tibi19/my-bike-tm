@@ -35,11 +35,25 @@ const val TEXT_WHEELS = "Wheels"
 const val TEXT_INCHES_NOTATION = "\""
 const val TEXT_KM_UNIT = "km"
 const val TEXT_MI_UNIT = "mi"
-const val TEXT_MISSING_ICON_CONTENT = "No bikes have been added."
-const val TEXT_MISSING_DOTTED_LINE_CONTENT = "Proceed to adding a bike."
+const val TEXT_MISSING_BIKES_CONTENT = "No bikes have been added."
+const val TEXT_MISSING_BIKES_DOTTED_LINE_CONTENT = "Proceed to adding a bike."
 const val TEXT_MISSING_BIKES = "You don't have any bike added yet.\n" +
     "Add you first bike and start registering\n" +
     "your rides in order to keep your bike\n" +
     "service cycles up to date."
+const val TEXT_MISSING_RIDES_CONTENT = "No rides have been added."
+const val TEXT_MISSING_RIDES_DOTTED_LINE_CONTENT = "Proceed to adding a ride."
+const val TEXT_RIDES = "Rides"
+const val TEXT_STATISTICS_ICON_CONTENT = "Statistics icon"
+const val TEXT_STATISTICS_TITLE = "All Rides Statistics"
+const val TEXT_TOTAL = "Total: "
+const val TEXT_ROAD = "Road"
+const val TEXT_MTB = "MTB"
+const val TEXT_CITY = "City"
+const val TEXT_EBIKE = "E-Bike"
+const val TEXT_OLDER = "OLDER"
 
 const val PATTERN_DATE = "dd.MM.uuuu"
+const val PATTERN_NUMBER = "#,###"
+const val PATTERN_NUMBER_TO_REPLACE = ','
+const val PATTERN_NUMBER_REPLACE_WITH = '.'

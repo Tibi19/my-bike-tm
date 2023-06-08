@@ -16,6 +16,7 @@ import com.tam.mybike.ui.theme.BlueGray
 import com.tam.mybike.ui.theme.TEXT_DURATION
 import com.tam.mybike.ui.theme.TEXT_DURATION_DESCRIPTION_HOURS
 import com.tam.mybike.ui.theme.TEXT_DURATION_DESCRIPTION_MINUTES
+import com.tam.mybike.ui.util.getStringFromDuration
 
 data class DurationState(
     val hours: Int,
@@ -25,7 +26,7 @@ data class DurationState(
         if (isEmpty()) {
             ""
         } else {
-            "$hours$TEXT_DURATION_DESCRIPTION_HOURS$minutes$TEXT_DURATION_DESCRIPTION_MINUTES"
+            getStringFromDuration(hours, minutes)
         }
 
     fun isEmpty(): Boolean = hours == 0 && minutes == 0

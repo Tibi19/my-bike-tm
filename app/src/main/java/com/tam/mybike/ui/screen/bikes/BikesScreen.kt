@@ -34,7 +34,7 @@ import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.model.WheelSize
 import com.tam.mybike.ui.component.BikeImage
-import com.tam.mybike.ui.component.SurfacePreview
+import com.tam.mybike.ui.component.ScreenDarkPreview
 import com.tam.mybike.ui.component.WaveColumn
 import com.tam.mybike.ui.component.WrenchProgressBar
 import com.tam.mybike.ui.component.button.AddButton
@@ -58,13 +58,13 @@ import com.tam.mybike.ui.theme.TEXT_BIKES
 import com.tam.mybike.ui.theme.TEXT_CONNECTOR_IN
 import com.tam.mybike.ui.theme.TEXT_INCHES_NOTATION
 import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES
-import com.tam.mybike.ui.theme.TEXT_MISSING_DOTTED_LINE_CONTENT
-import com.tam.mybike.ui.theme.TEXT_MISSING_ICON_CONTENT
+import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES_DOTTED_LINE_CONTENT
+import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES_CONTENT
 import com.tam.mybike.ui.theme.TEXT_SERVICE
 import com.tam.mybike.ui.theme.TEXT_WHEELS
 import com.tam.mybike.ui.theme.WEIGHT_FILL
 import com.tam.mybike.ui.theme.WIDTH_DOTTED_LINE
-import com.tam.mybike.ui.util.text
+import com.tam.mybike.ui.util.suffix
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -85,11 +85,7 @@ fun BikesScreen(
 
     LazyColumn(modifier = Modifier.padding(horizontal = PADDING_MEDIUM)) {
         item {
-            Spacer(modifier = Modifier.height(PADDING_XX_LARGE))
-        }
-
-        item {
-            Spacer(modifier = Modifier.height(PADDING_XX_LARGE))
+            Spacer(modifier = Modifier.height(PADDING_XX_LARGE + PADDING_LARGE))
             Row(modifier = Modifier.padding(bottom = PADDING_MEDIUM)) {
                RowTitle(text = TEXT_BIKES)
                AddButton(
@@ -132,7 +128,7 @@ fun BikesScreen(
                     )
                     LargeDetails(
                         intro = TEXT_SERVICE,
-                        description = "${bike.serviceIn.amount}${state.distanceUnit.text}",
+                        description = "${bike.serviceIn.amount}${state.distanceUnit.suffix}",
                         connector = TEXT_CONNECTOR_IN
                     )
                     val bikeProgress = state.bikeToProgressMap[bike.id] ?: FALLBACK_BIKE_PROGRESS
@@ -156,7 +152,7 @@ private fun EmptyBikesScreen(goToAddBike: () -> Unit) =
         )
         Image(
             painter = painterResource(id = R.drawable.missing_bike_card),
-            contentDescription = TEXT_MISSING_ICON_CONTENT,
+            contentDescription = TEXT_MISSING_BIKES_CONTENT,
             contentScale = ContentScale.FillWidth,
             modifier = Modifier.fillMaxWidth()
         )
@@ -168,7 +164,7 @@ private fun EmptyBikesScreen(goToAddBike: () -> Unit) =
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.dotted_line),
-                contentDescription = TEXT_MISSING_DOTTED_LINE_CONTENT,
+                contentDescription = TEXT_MISSING_BIKES_DOTTED_LINE_CONTENT,
                 tint = MaterialTheme.colorScheme.tertiary,
                 modifier = Modifier.width(WIDTH_DOTTED_LINE)
             )
@@ -192,7 +188,7 @@ private fun EmptyBikesScreen(goToAddBike: () -> Unit) =
 @Preview
 @Composable
 private fun BikesScreenPreview() =
-    SurfacePreview {
+    ScreenDarkPreview {
         val mockBikes = listOf(
             Bike(
                 id = 1,
@@ -241,6 +237,6 @@ private fun BikesScreenPreview() =
 @Preview
 @Composable
 private fun EmptyBikesScreenPreview() =
-    SurfacePreview {
+    ScreenDarkPreview {
         EmptyBikesScreen(goToAddBike = {})
     }

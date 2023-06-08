@@ -37,7 +37,7 @@ fun WrapHeightPreview(content: @Composable () -> Unit) =
     }
 
 @Composable
-fun SurfacePreview(content: @Composable () -> Unit) =
+fun ScreenDarkPreview(content: @Composable () -> Unit) =
     MyBikeTheme {
         Surface(
             color = MaterialTheme.colorScheme.surface,
@@ -45,6 +45,18 @@ fun SurfacePreview(content: @Composable () -> Unit) =
             modifier = Modifier
                 .fillMaxHeight()
                 .width(WIDTH_PREVIEW)
+        ) {
+            content()
+        }
+    }
+
+@Composable
+fun WrapHeightDarkPreview(content: @Composable () -> Unit) =
+    MyBikeTheme {
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            contentColor = Color.White,
+            modifier = Modifier.width(WIDTH_PREVIEW)
         ) {
             content()
         }

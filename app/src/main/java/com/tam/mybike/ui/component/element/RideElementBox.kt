@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.tam.mybike.R
 import com.tam.mybike.ui.component.WrapHeightPreview
 import com.tam.mybike.ui.component.text.MediumDetails
+import com.tam.mybike.ui.theme.FACTOR_RIDES_FOREGROUND_DARKNESS
 import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_RIDE_ICON_IMAGE
 import com.tam.mybike.ui.theme.PADDING_RIDE_ICON_INSIDE_BACKGROUND
@@ -31,6 +32,15 @@ import com.tam.mybike.ui.theme.TEXT_DATE
 import com.tam.mybike.ui.theme.TEXT_DISTANCE
 import com.tam.mybike.ui.theme.TEXT_DURATION
 import com.tam.mybike.ui.theme.TEXT_RIDE
+import com.tam.mybike.ui.util.darken
+
+data class RideDetails(
+    val title: String,
+    val bikeName: String,
+    val distance: String,
+    val duration: String,
+    val date: String
+)
 
 @Composable
 fun RideElementBox(
@@ -38,7 +48,7 @@ fun RideElementBox(
     onEditMenuOption: () -> Unit,
     onDeleteMenuOption: () -> Unit,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = MaterialTheme.colorScheme.background
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceVariant
 ) =
     ElementBox(
         onEditMenuOption = onEditMenuOption,
@@ -109,14 +119,6 @@ private fun RideIcon(
                 .align(Alignment.Center)
         )
     }
-
-data class RideDetails(
-    val title: String,
-    val bikeName: String,
-    val distance: String,
-    val duration: String,
-    val date: String
-)
 
 private fun RideDetails.toIntroAndDescriptionPairs() =
     listOf(

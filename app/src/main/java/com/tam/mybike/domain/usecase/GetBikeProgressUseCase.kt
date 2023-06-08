@@ -20,7 +20,8 @@ class GetBikeProgressUseCase @Inject constructor(
             unit = DistanceUnit.KM
         )
         val maxProgressDistance = unitConverterUseCase(maxProgressDistanceKm)
-        val progress = serviceIn.amount.toFloat() / maxProgressDistance.amount.toFloat()
+        val distanceProgressed = maxProgressDistance.amount - serviceIn.amount
+        val progress = distanceProgressed.toFloat() / maxProgressDistance.amount.toFloat()
         return progress.coerceIn(PROGRESS_MIN, PROGRESS_MAX)
     }
 

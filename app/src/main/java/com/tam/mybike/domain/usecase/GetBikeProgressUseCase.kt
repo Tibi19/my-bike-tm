@@ -10,16 +10,16 @@ private const val PROGRESS_MIN = 0f
 private const val PROGRESS_MAX = 1f
 
 class GetBikeProgressUseCase @Inject constructor(
-    private val unitConverterUseCase: UnitConverterUseCase
+    private val convertToSettingsUnit: ConvertToSettingsUnitUseCase
 ) {
 
     operator fun invoke(bike: Bike): Float {
-        val serviceIn = unitConverterUseCase(bike.serviceIn)
+        val serviceIn = convertToSettingsUnit(bike.serviceIn)
         val maxProgressDistanceKm = Distance(
             amount = MAX_PROGRESS_DISTANCE_KM,
             unit = DistanceUnit.KM
         )
-        val maxProgressDistance = unitConverterUseCase(maxProgressDistanceKm)
+        val maxProgressDistance = convertToSettingsUnit(maxProgressDistanceKm)
         val distanceProgressed = maxProgressDistance.amount - serviceIn.amount
         val progress = distanceProgressed.toFloat() / maxProgressDistance.amount.toFloat()
         return progress.coerceIn(PROGRESS_MIN, PROGRESS_MAX)

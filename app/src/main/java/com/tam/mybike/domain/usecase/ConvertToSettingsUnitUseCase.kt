@@ -8,7 +8,7 @@ import javax.inject.Inject
 private const val KM_TO_MI_CONVERSION_FACTOR = 0.621371
 private const val MI_TO_KM_CONVERSION_FACTOR = 1.609344
 
-class UnitConverterUseCase @Inject constructor(
+class ConvertToSettingsUnitUseCase @Inject constructor(
     private val repository: Repository
 ) {
 

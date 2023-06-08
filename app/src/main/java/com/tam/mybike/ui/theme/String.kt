@@ -35,5 +35,11 @@ const val TEXT_WHEELS = "Wheels"
 const val TEXT_INCHES_NOTATION = "\""
 const val TEXT_KM_UNIT = "km"
 const val TEXT_MI_UNIT = "mi"
+const val TEXT_MISSING_ICON_CONTENT = "No bikes have been added."
+const val TEXT_MISSING_DOTTED_LINE_CONTENT = "Proceed to adding a bike."
+const val TEXT_MISSING_BIKES = "You don't have any bike added yet.\n" +
+    "Add you first bike and start registering\n" +
+    "your rides in order to keep your bike\n" +
+    "service cycles up to date."
 
 const val PATTERN_DATE = "dd.MM.uuuu"

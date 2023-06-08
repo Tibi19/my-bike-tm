@@ -12,6 +12,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.geometry.Offset
@@ -29,22 +30,28 @@ import com.tam.mybike.ui.theme.SCALE_WAVE_BACKGROUND
 fun WaveColumn(
     waveBackgroundColor: Color,
     modifier: Modifier = Modifier,
+    fillScreenHeight: Boolean = true,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val scrollState = rememberScrollState()
     Box(
-        modifier = Modifier
-            .verticalScroll(scrollState)
-            .fillMaxSize()
-            .drawBehind {
-                drawRect(
-                    color = waveBackgroundColor,
-                    topLeft = Offset(
-                        x = OFFSET_X_WAVE_COLUMN_BEHIND_RECT,
-                        y = OFFSET_Y_WAVE_COLUMN_BEHIND_RECT
-                    )
-                )
+        modifier = if (fillScreenHeight) {
+                Modifier
+                    .verticalScroll(scrollState)
+                    .drawBehind {
+                        drawRect(
+                            color = waveBackgroundColor,
+                            topLeft = Offset(
+                                x = OFFSET_X_WAVE_COLUMN_BEHIND_RECT,
+                                y = OFFSET_Y_WAVE_COLUMN_BEHIND_RECT
+                            )
+                        )
+                    }
+            } else {
+                Modifier
             }
+            .fillMaxSize()
+            .clip(MaterialTheme.shapes.medium)
     ) {
         Icon(
             painter = painterResource(id = R.drawable.background_wave),

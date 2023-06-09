@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
@@ -71,38 +73,43 @@ fun RidesScreen(
         return
     }
 
-    Column(
-        modifier = Modifier
-            .verticalScroll(state = rememberScrollState())
-            .padding(horizontal = PADDING_MEDIUM)
+    LazyColumn(
+        modifier = Modifier.padding(horizontal = PADDING_MEDIUM)
     ) {
-        Row(modifier = Modifier.padding(bottom = PADDING_MEDIUM)) {
-            RowTitle(text = TEXT_RIDES)
-            AddButton(
-                elementTitle = TEXT_RIDE,
-                onClick = goToAddRide
+        item {
+            Row(modifier = Modifier.padding(bottom = PADDING_MEDIUM)) {
+                RowTitle(text = TEXT_RIDES)
+                AddButton(
+                    elementTitle = TEXT_RIDE,
+                    onClick = goToAddRide
+                )
+            }
+        }
+
+        item {
+            RidesStatistics(
+                bikeTypeToDistanceMap = state.bikeTypeToDistanceMap,
+                totalDistance = state.totalDistance,
+                modifier = Modifier.padding(bottom = PADDING_MEDIUM)
             )
         }
-        RidesStatistics(
-            bikeTypeToDistanceMap = state.bikeTypeToDistanceMap,
-            totalDistance = state.totalDistance,
-            modifier = Modifier.padding(bottom = PADDING_MEDIUM)
-        )
 
         var ridesByMonthIndex = 0
         state.ridesByMonth.forEach { (month, rides) ->
             val monthTitle = if (ridesByMonthIndex <= MONTHS_COUNT_TO_DISPLAY) month.toMonthName() else TEXT_OLDER
             ridesByMonthIndex++
             monthTitle?.let {
-                Title(
-                    text = it,
-                    style = MaterialTheme.typography.titleLarge
-                        .copy(color = MaterialTheme.colorScheme.tertiary),
-                    modifier = Modifier.padding(bottom = PADDING_SMALL)
-                )
+                item {
+                    Title(
+                        text = it,
+                        style = MaterialTheme.typography.titleLarge
+                            .copy(color = MaterialTheme.colorScheme.tertiary),
+                        modifier = Modifier.padding(bottom = PADDING_SMALL)
+                    )
+                }
             }
 
-            rides.forEach { ride ->
+            items(rides) { ride ->
                 RideElementBox(
                     rideDetails = RideDetails(
                         title = ride.name,
@@ -121,6 +128,7 @@ fun RidesScreen(
                         .fillMaxWidth()
                 )
             }
+
         }
     }
 

@@ -16,6 +16,7 @@ class EditBikeViewModel @Inject constructor(
         savedStateHandle.get<Int>("TODO////PLACEHOLDER_ID_KEY")?.let { bikeId ->
             loadBike(bikeId)
         }
+        loadSettingsUnit()
     }
 
     private fun loadBike(bikeId: Int) {

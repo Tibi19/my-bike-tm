@@ -9,6 +9,10 @@ import javax.inject.Inject
 @HiltViewModel
 class AddBikeViewModel @Inject constructor() : BikeFormViewModel() {
 
+    init {
+        loadSettingsUnit()
+    }
+
     override fun confirmForm() {
         val bike = with(mutableState.value) {
             Bike(

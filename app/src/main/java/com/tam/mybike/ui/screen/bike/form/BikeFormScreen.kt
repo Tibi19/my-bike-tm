@@ -86,6 +86,7 @@ fun BikeFormScreen(
         contentPadding = PaddingValues(vertical = PADDING_SMALL)
     ) {
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .padding(bottom = PADDING_XX_LARGE)
                 .padding(horizontal = PADDING_MEDIUM)

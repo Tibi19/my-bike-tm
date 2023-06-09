@@ -14,6 +14,10 @@ abstract class BikeFormViewModel : ViewModel() {
     protected val mutableState = MutableStateFlow(BikeFormState())
     val state = mutableState.asStateFlow()
 
+    protected fun loadSettingsUnit() {
+        TODO("Not yet implemented")
+    }
+
     abstract fun confirmForm()
 
     fun onEvent(event: BikeFormEvent) =

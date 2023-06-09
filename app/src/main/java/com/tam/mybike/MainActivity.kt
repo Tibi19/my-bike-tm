@@ -28,11 +28,15 @@ import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.model.WheelSize
 import com.tam.mybike.ui.component.RidesStatistics
 import com.tam.mybike.ui.component.button.DefaultSwitch
+import com.tam.mybike.ui.screen.bike.form.BikeFormScreen
+import com.tam.mybike.ui.screen.bike.form.BikeFormState
 import com.tam.mybike.ui.screen.settings.SettingsEvent
 import com.tam.mybike.ui.theme.BikeColors
 import com.tam.mybike.ui.theme.MyBikeTheme
 import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
+import com.tam.mybike.ui.theme.TEXT_ADD_BIKE
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class MainActivity : ComponentActivity() {
 
@@ -46,23 +50,22 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.surface
                 ) {
 
-                    Column(
-                        modifier = Modifier
-                            .background(color = MaterialTheme.colorScheme.surfaceVariant)
-                            .fillMaxSize()
-                    ) {
-
-                        var isSwitchOn by remember { mutableStateOf(true) }
-                        DefaultSwitch(
-                            isOn = isSwitchOn,
-                            onSwitch = {
-                                isSwitchOn = !isSwitchOn
-                            },
-                            modifier = Modifier
-                                .padding(start = PADDING_MEDIUM, end = PADDING_X_SMALL)
-                        )
-
+                    val mockState = BikeFormState(
+                        bikeName = "Nukeproof Scout 290",
+                        serviceIn = Distance(1000, DistanceUnit.KM),
+                        selectedBikeType = BikeType.MTB,
+                        wheelSize = WheelSize.BIG
+                    )
+                    val stateFlow = remember {
+                        MutableStateFlow(mockState)
                     }
+                    BikeFormScreen(
+                        screenTitle = TEXT_ADD_BIKE,
+                        confirmText = TEXT_ADD_BIKE,
+                        stateFlow = stateFlow,
+                        onEvent = {},
+                        goToPreviousScreen = {}
+                    )
 
                 }
 

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class BikesViewModel @Inject constructor(): ViewModel() {
+class BikesViewModel @Inject constructor() : ViewModel() {
 
     private val mutableState = MutableStateFlow(BikesState())
     val state = mutableState.asStateFlow()

@@ -35,13 +35,14 @@ private val RANGE_MINUTES = 0..59
 @Composable
 fun DurationDialog(
     isOpenState: MutableState<Boolean>,
-    durationState: MutableState<DurationState>,
+    duration: DurationState,
+    onDurationChange: (DurationState) -> Unit,
     onClose: () -> Unit = {}
 ) {
     if (!isOpenState.value) return
 
-    val hoursState = remember { mutableStateOf(durationState.value.hours) }
-    val minutesState = remember { mutableStateOf(durationState.value.minutes) }
+    val hoursState = remember { mutableStateOf(duration.hours) }
+    val minutesState = remember { mutableStateOf(duration.minutes) }
     Dialog(onDismissRequest = {
         isOpenState.value = false
         onClose()
@@ -66,9 +67,11 @@ fun DurationDialog(
                     confirmText = TEXT_OK,
                     onConfirm = {
                         isOpenState.value = false
-                        durationState.value = DurationState(
-                            hours = hoursState.value,
-                            minutes = minutesState.value
+                        onDurationChange(
+                            DurationState(
+                                hours = hoursState.value,
+                                minutes = minutesState.value
+                            )
                         )
                         onClose()
                     },

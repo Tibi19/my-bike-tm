@@ -66,6 +66,8 @@ const val TEXT_WHEEL_SIZE = "Wheel Size"
 const val TEXT_SERVICE_IN = "Service In"
 const val TEXT_EDIT_BIKE = "Edit Bike"
 const val TEXT_SAVE = "Save"
+const val TEXT_RIDE_TITLE = "Ride Title"
+const val TEXT_EDIT_RIDE = "Edit Ride"
 
 const val PATTERN_DATE = "dd.MM.uuuu"
 const val PATTERN_NUMBER = "#,###"

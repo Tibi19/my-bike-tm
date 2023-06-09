@@ -26,6 +26,7 @@ import com.tam.mybike.ui.theme.TEXT_OK
 fun DateDialog(
     isOpenState: MutableState<Boolean>,
     dateState: DatePickerState,
+    onDateChange: (Long?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (!isOpenState.value) return
@@ -36,7 +37,7 @@ fun DateDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    dateState.selectedDateMillis = selectionDateState.selectedDateMillis
+                    onDateChange(selectionDateState.selectedDateMillis)
                     isOpenState.value = false
                 },
                 shape = MaterialTheme.shapes.medium,

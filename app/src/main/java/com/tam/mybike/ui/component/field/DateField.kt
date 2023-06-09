@@ -25,6 +25,7 @@ import com.tam.mybike.ui.util.formatDate
 @Composable
 fun DateField(
     dateState: DatePickerState,
+    onDateChange: (Long?) -> Unit,
     modifier: Modifier = Modifier,
     isRequired: Boolean = true
 ) {
@@ -54,7 +55,8 @@ fun DateField(
 
     DateDialog(
         isOpenState = isDatePickerOpenState,
-        dateState = dateState
+        dateState = dateState,
+        onDateChange = onDateChange
     )
 }
 
@@ -66,6 +68,7 @@ private fun DateFieldPreview() =
         val dateState = rememberDatePickerState(initialSelectedDateMillis = System.currentTimeMillis())
         DateField(
             dateState = dateState,
+            onDateChange = {},
             modifier = Modifier.padding(PADDING_LARGE)
         )
     }

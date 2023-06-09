@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,8 +13,6 @@ import androidx.compose.ui.Modifier
 import com.tam.mybike.ui.component.popup.DurationDialog
 import com.tam.mybike.ui.theme.BlueGray
 import com.tam.mybike.ui.theme.TEXT_DURATION
-import com.tam.mybike.ui.theme.TEXT_DURATION_DESCRIPTION_HOURS
-import com.tam.mybike.ui.theme.TEXT_DURATION_DESCRIPTION_MINUTES
 import com.tam.mybike.ui.util.getStringFromDuration
 
 data class DurationState(
@@ -31,14 +28,23 @@ data class DurationState(
 
     fun isEmpty(): Boolean = hours == 0 && minutes == 0
 
+    fun toMinutes(): Int = hours * MINUTES_IN_HOUR + minutes
+
     companion object {
-        val empty = DurationState(0, 0)
+        private const val MINUTES_IN_HOUR = 60
+
+        fun fromMinutes(minutes: Int): DurationState {
+            val minutesToHour = minutes % MINUTES_IN_HOUR
+            val hours = minutes / MINUTES_IN_HOUR
+            return DurationState(hours, minutesToHour)
+        }
     }
 }
 
 @Composable
 fun DurationField(
-    durationState: MutableState<DurationState>,
+    duration: DurationState,
+    onDurationChange: (DurationState) -> Unit,
     modifier: Modifier = Modifier,
     isRequired: Boolean = true,
 ) {
@@ -60,7 +66,7 @@ fun DurationField(
             isRequired = isRequired
         )
         FieldContent(
-            text = durationState.value.toString(),
+            text = duration.toString(),
             onClick = { isDurationPickerOpenState.value = true },
             borderColor = borderColor
         )
@@ -69,9 +75,10 @@ fun DurationField(
 
     DurationDialog(
         isOpenState = isDurationPickerOpenState,
-        durationState = durationState,
+        duration = duration,
+        onDurationChange = onDurationChange,
         onClose = {
-            isAlertOn = durationState.value.isEmpty()
+            isAlertOn = duration.isEmpty()
         }
     )
 }

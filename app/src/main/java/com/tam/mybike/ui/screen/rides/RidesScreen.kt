@@ -74,7 +74,9 @@ fun RidesScreen(
     }
 
     LazyColumn(
-        modifier = Modifier.padding(horizontal = PADDING_MEDIUM)
+        modifier = Modifier
+            .padding(top = PADDING_SMALL)
+            .padding(horizontal = PADDING_MEDIUM)
     ) {
         item {
             Row(modifier = Modifier.padding(bottom = PADDING_MEDIUM)) {

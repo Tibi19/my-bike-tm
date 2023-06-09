@@ -52,8 +52,13 @@ const val TEXT_MTB = "MTB"
 const val TEXT_CITY = "City"
 const val TEXT_EBIKE = "E-Bike"
 const val TEXT_OLDER = "OLDER"
+const val TEXT_SETTINGS = "Settings"
+const val TEXT_DISTANCE_UNITS = "Distance Units"
+const val TEXT_SERVICE_REMINDER = "Service Reminder"
+const val TEXT_DEFAULT_BIKE = "Default Bike"
 
 const val PATTERN_DATE = "dd.MM.uuuu"
 const val PATTERN_NUMBER = "#,###"
 const val PATTERN_NUMBER_TO_REPLACE = ','
 const val PATTERN_NUMBER_REPLACE_WITH = '.'
+const val PATTERN_REGEX_LETTERS = "[a-zA-Z]+"

@@ -31,7 +31,8 @@ import com.tam.mybike.ui.util.darken
 @Composable
 fun DropdownChoicesMenu(
     isExpandedState: MutableState<Boolean>,
-    selectedChoiceState: MutableState<ChoiceHolder>,
+    selectedChoice: ChoiceHolder,
+    onChoiceChange: (ChoiceHolder) -> Unit,
     choices: List<ChoiceHolder>,
     dropdownHorizontalPadding: Dp,
     modifier: Modifier = Modifier,
@@ -46,7 +47,7 @@ fun DropdownChoicesMenu(
             .width(getDropdownWidth(dropdownHorizontalPadding))
     ) {
         choices.forEach { choice ->
-            val backgroundColor = if (choice == selectedChoiceState.value) {
+            val backgroundColor = if (choice == selectedChoice) {
                 MaterialTheme.colorScheme.tertiary
                     .darken(darkenFactor = FACTOR_SELECTED_DROPDOWN_CHOICE_DARKNESS)
             } else {
@@ -61,7 +62,7 @@ fun DropdownChoicesMenu(
                     )
                 },
                 onClick = {
-                    selectedChoiceState.value = choice
+                    onChoiceChange(choice)
                     isExpandedState.value = false
                 },
                 contentPadding = PaddingValues(

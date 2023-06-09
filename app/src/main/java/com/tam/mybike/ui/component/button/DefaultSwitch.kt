@@ -4,19 +4,23 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.IconToggleButton
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.BiasAlignment
 import androidx.compose.ui.Modifier
@@ -26,9 +30,10 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.tooling.preview.Preview
 import com.tam.mybike.ui.component.WrapHeightPreview
-import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_START
 import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_END
+import com.tam.mybike.ui.theme.BIAS_SWITCH_THUMB_START
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
+import com.tam.mybike.ui.theme.RADIUS_SWITCH_RIPPLE
 import com.tam.mybike.ui.theme.SIZE_DEFAULT_SWITCH
 import com.tam.mybike.ui.theme.SIZE_DEFAULT_SWITCH_THUMB
 import com.tam.mybike.ui.theme.SIZE_DEFAULT_SWITCH_TRACK_STROKE
@@ -39,16 +44,20 @@ fun DefaultSwitch(
     modifier: Modifier = Modifier,
     onSwitch: (isOn: Boolean) -> Unit
 ) =
-    // Custom switch implementation, as the material switch does not align with the required UI
-    IconToggleButton(
-        checked = isOn,
-        onCheckedChange = onSwitch,
+    Box(
         modifier = modifier
+            .size(SIZE_DEFAULT_SWITCH)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple(
+                    bounded = false,
+                    radius = RADIUS_SWITCH_RIPPLE
+                ),
+                onClick = { onSwitch(!isOn) }
+            )
     ) {
-        Box(modifier = Modifier.size(SIZE_DEFAULT_SWITCH)) {
-            DefaultSwitchTrack(isOn = isOn)
-            DefaultSwitchThumb(isOn = isOn, onSwitch = onSwitch)
-        }
+        DefaultSwitchTrack(isOn = isOn)
+        DefaultSwitchThumb(isOn = isOn, onSwitch = onSwitch)
     }
 
 @Composable
@@ -125,9 +134,11 @@ private fun BoxScope.DefaultSwitchThumb(
 @Composable
 private fun DefaultSwitchPreview() =
     WrapHeightPreview {
-        DefaultSwitch(
-            isOn = true,
-            modifier = Modifier.padding(horizontal = PADDING_X_SMALL),
-            onSwitch = {}
-        )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            DefaultSwitch(
+                isOn = true,
+                modifier = Modifier.padding(horizontal = PADDING_X_SMALL),
+                onSwitch = {}
+            )
+        }
     }

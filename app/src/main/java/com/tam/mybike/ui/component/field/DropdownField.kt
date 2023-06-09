@@ -9,10 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,7 +33,8 @@ data class ChoiceHolder(
 
 @Composable
 fun DropdownField(
-    selectedChoiceState: MutableState<ChoiceHolder>,
+    selectedChoice: ChoiceHolder,
+    onChoiceChange: (ChoiceHolder) -> Unit,
     choices: List<ChoiceHolder>,
     label: String,
     dropdownHorizontalPadding: Dp,
@@ -56,7 +57,7 @@ fun DropdownField(
             isRequired = isRequired
         )
         FieldContent(
-            text = selectedChoiceState.value.text,
+            text = selectedChoice.text,
             onClick = { isDropdownExpandedState.value = true },
             borderColor = borderColor,
             trailingContent = {
@@ -73,7 +74,8 @@ fun DropdownField(
 
         DropdownChoicesMenu(
             isExpandedState = isDropdownExpandedState,
-            selectedChoiceState = selectedChoiceState,
+            selectedChoice = selectedChoice,
+            onChoiceChange = onChoiceChange,
             choices = choices,
             dropdownHorizontalPadding = dropdownHorizontalPadding,
             dropdownItemIcon = dropdownItemIcon
@@ -85,13 +87,14 @@ fun DropdownField(
 @Composable
 private fun DropdownFieldPreview() =
     WrapHeightPreview {
-        val selectecChoiceState = remember {
-            mutableStateOf(
-                ChoiceHolder(key = "2", "Highroad Scout 220")
-            )
+        var selectedChoice by remember {
+            mutableStateOf(ChoiceHolder(key = "2", "Highroad Scout 220"))
         }
         DropdownField(
-            selectedChoiceState = selectecChoiceState,
+            selectedChoice = selectedChoice,
+            onChoiceChange = { newChoice ->
+                selectedChoice = newChoice
+            },
             choices = listOf(
                 ChoiceHolder(key = "0", "E-Bike Cannondale"),
                 ChoiceHolder(key = "1", "Nukeproof Scout 290"),

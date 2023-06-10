@@ -111,7 +111,7 @@ fun BikesScreen(
                 innerPaddingValues = PaddingValues(PADDING_BIKE_BOX_INNER_PADDING),
                 optionsPaddingValues = PaddingValues(PADDING_SMALL),
                 backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier.padding(bottom = PADDING_MEDIUM)
+                modifier = Modifier.padding(bottom = PADDING_SMALL)
             ) {
                 WaveColumn(
                     waveBackgroundColor = MaterialTheme.colorScheme.background,

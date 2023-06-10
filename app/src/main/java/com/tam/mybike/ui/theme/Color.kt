@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 // App colors
 val Blue = Color(0xFF0066F5)
 val BlueDark = Color(0xFF222C48)
+val BlueLight = Color(0xFF4589FF)
 val BluePale = Color(0xFF5A6C9E)
 val BluePaleDark = Color(0xFF364673)
 val BlueGray = Color(0xFF636B81)

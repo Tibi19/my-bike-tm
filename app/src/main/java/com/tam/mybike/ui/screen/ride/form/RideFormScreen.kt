@@ -1,5 +1,6 @@
 package com.tam.mybike.ui.screen.ride.form
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +24,7 @@ import com.tam.mybike.domain.model.BikeType
 import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.model.WheelSize
+import com.tam.mybike.ui.component.ScreenDarkPreview
 import com.tam.mybike.ui.component.ScreenPreview
 import com.tam.mybike.ui.component.button.ConfirmButton
 import com.tam.mybike.ui.component.field.ChoiceHolder
@@ -61,6 +63,7 @@ fun RideFormScreen(
     
     Column(
         modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.surfaceVariant)
             .padding(top = PADDING_SMALL, bottom = PADDING_MEDIUM)
             .padding(horizontal = PADDING_MEDIUM)
     ) {
@@ -163,7 +166,7 @@ fun RideFormScreen(
 @Preview
 @Composable
 private fun RideFormScreenPreview() =
-    ScreenPreview {
+    ScreenDarkPreview {
         val mockBikes = listOf(
             Bike(
                 id = 1,

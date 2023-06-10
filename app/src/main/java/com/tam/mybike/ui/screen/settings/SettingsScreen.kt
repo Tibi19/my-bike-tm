@@ -1,8 +1,10 @@
 package com.tam.mybike.ui.screen.settings
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -15,6 +17,7 @@ import com.tam.mybike.domain.model.BikeType
 import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.model.WheelSize
+import com.tam.mybike.ui.component.ScreenDarkPreview
 import com.tam.mybike.ui.component.ScreenPreview
 import com.tam.mybike.ui.component.button.DefaultSwitch
 import com.tam.mybike.ui.component.field.ChoiceHolder
@@ -44,7 +47,11 @@ fun SettingsScreen(
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier.padding(horizontal = PADDING_MEDIUM, vertical = PADDING_SMALL)) {
+    Column(
+        modifier = Modifier
+            .background(color = MaterialTheme.colorScheme.surfaceVariant)
+            .padding(horizontal = PADDING_MEDIUM, vertical = PADDING_SMALL)
+    ) {
         Title(
             text = TEXT_SETTINGS,
             modifier = Modifier.padding(bottom = PADDING_LARGE)
@@ -124,7 +131,7 @@ fun SettingsScreen(
 @Preview
 @Composable
 fun SettingsScreenPreview() =
-    ScreenPreview {
+    ScreenDarkPreview {
         val mockBikes = listOf(
             Bike(
                 id = 1,

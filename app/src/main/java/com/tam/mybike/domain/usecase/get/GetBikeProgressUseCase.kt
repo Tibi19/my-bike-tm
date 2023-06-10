@@ -1,8 +1,9 @@
-package com.tam.mybike.domain.usecase
+package com.tam.mybike.domain.usecase.get
 
 import com.tam.mybike.domain.model.Bike
 import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.DistanceUnit
+import com.tam.mybike.domain.usecase.ConvertToSettingsUnitUseCase
 import javax.inject.Inject
 
 private const val MAX_PROGRESS_DISTANCE_KM = 1000
@@ -13,7 +14,7 @@ class GetBikeProgressUseCase @Inject constructor(
     private val convertToSettingsUnit: ConvertToSettingsUnitUseCase
 ) {
 
-    operator fun invoke(bike: Bike): Float {
+    suspend operator fun invoke(bike: Bike): Float {
         val serviceIn = convertToSettingsUnit(bike.serviceIn)
         val maxProgressDistanceKm = Distance(
             amount = MAX_PROGRESS_DISTANCE_KM,

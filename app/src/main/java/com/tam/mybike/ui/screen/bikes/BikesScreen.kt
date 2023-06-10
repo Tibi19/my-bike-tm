@@ -115,7 +115,7 @@ fun BikesScreen(
             ) {
                 WaveColumn(
                     waveBackgroundColor = MaterialTheme.colorScheme.background,
-                    fillScreenHeight = false,
+                    snapToScreenHeight = false,
                     modifier = Modifier
                         .padding(vertical = PADDING_SMALL, horizontal = PADDING_MEDIUM)
                 ) {

@@ -37,15 +37,16 @@ import com.tam.mybike.ui.theme.SCALE_WAVE_BACKGROUND
 fun WaveColumn(
     waveBackgroundColor: Color,
     modifier: Modifier = Modifier,
-    fillScreenHeight: Boolean = true,
     offsetWaveY: Dp = 0.dp,
-    contentPadding: PaddingValues = PaddingValues(0.dp),
+    snapToScreenHeight: Boolean = true,
+    contentPaddingForSnappingHeight: PaddingValues = PaddingValues(0.dp),
+    isContentOverflowingScreenHeight: Boolean = false,
     content: @Composable ColumnScope.() -> Unit
 ) {
     val scrollState = rememberScrollState()
     val density = LocalDensity.current.density
     Box(
-        modifier = if (fillScreenHeight) {
+        modifier = if (snapToScreenHeight || isContentOverflowingScreenHeight) {
             Modifier
                 .verticalScroll(scrollState)
                 .drawBehind {
@@ -74,13 +75,14 @@ fun WaveColumn(
                 .offset(x = 0.dp, y = offsetWaveY)
         )
         Column(
-            modifier = if (fillScreenHeight) {
-                // fillMaxHeight does not work, so we have to force the height
+            modifier = if (snapToScreenHeight) {
+                // fillMaxHeight does not work when elements don't overflow the screen height,
+                // So we have to force the height
                 modifier
-                    .padding(contentPadding)
-                    .height(getColumnFillHeight(contentPadding))
+                    .padding(contentPaddingForSnappingHeight)
+                    .height(getColumnFillHeight(contentPaddingForSnappingHeight))
             } else {
-                modifier.padding(contentPadding)
+                modifier
             }
         ) {
             content()

@@ -48,7 +48,7 @@ import com.tam.mybike.ui.component.field.ChoiceHolder
 import com.tam.mybike.ui.component.field.DropdownField
 import com.tam.mybike.ui.component.field.InputField
 import com.tam.mybike.ui.component.text.RowTitle
-import com.tam.mybike.ui.theme.OFFSET_Y_SCREEN_WAVE
+import com.tam.mybike.ui.theme.OFFSET_Y_BIKE_FORM_WAVE
 import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_SMALL
 import com.tam.mybike.ui.theme.PADDING_XX_LARGE
@@ -82,8 +82,8 @@ fun BikeFormScreen(
 
     WaveColumn(
         waveBackgroundColor = MaterialTheme.colorScheme.surfaceVariant,
-        offsetWaveY = OFFSET_Y_SCREEN_WAVE,
-        contentPadding = PaddingValues(vertical = PADDING_SMALL)
+        offsetWaveY = OFFSET_Y_BIKE_FORM_WAVE,
+        contentPaddingForSnappingHeight = PaddingValues(vertical = PADDING_SMALL)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,

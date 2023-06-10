@@ -18,7 +18,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,6 +42,7 @@ import com.tam.mybike.ui.component.WrenchProgressBar
 import com.tam.mybike.ui.component.button.AddButton
 import com.tam.mybike.ui.component.button.ConfirmButton
 import com.tam.mybike.ui.component.element.ElementBox
+import com.tam.mybike.ui.component.popup.DeleteDialog
 import com.tam.mybike.ui.component.text.LargeDetails
 import com.tam.mybike.ui.component.text.RowTitle
 import com.tam.mybike.ui.component.text.Title
@@ -58,8 +61,8 @@ import com.tam.mybike.ui.theme.TEXT_BIKES
 import com.tam.mybike.ui.theme.TEXT_CONNECTOR_IN
 import com.tam.mybike.ui.theme.TEXT_INCHES_NOTATION
 import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES
-import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES_DOTTED_LINE_CONTENT
 import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES_CONTENT
+import com.tam.mybike.ui.theme.TEXT_MISSING_BIKES_DOTTED_LINE_CONTENT
 import com.tam.mybike.ui.theme.TEXT_SERVICE
 import com.tam.mybike.ui.theme.TEXT_WHEELS
 import com.tam.mybike.ui.theme.WEIGHT_FILL
@@ -83,6 +86,9 @@ fun BikesScreen(
         return
     }
 
+    val isDeleteDialogOpenState = remember { mutableStateOf(false) }
+    var bikeToDelete by remember { mutableStateOf<Bike?>(null) }
+
     LazyColumn(modifier = Modifier.padding(horizontal = PADDING_MEDIUM)) {
         item {
             Spacer(modifier = Modifier.height(PADDING_XX_LARGE + PADDING_LARGE))
@@ -99,8 +105,8 @@ fun BikesScreen(
             ElementBox(
                 onEditMenuOption = goToEditBike,
                 onDeleteMenuOption = {
-                    val deleteEvent = BikesEvent.DeleteBike(bike.id)
-                    onEvent(deleteEvent)
+                    bikeToDelete = bike
+                    isDeleteDialogOpenState.value = true
                 },
                 innerPaddingValues = PaddingValues(PADDING_BIKE_BOX_INNER_PADDING),
                 optionsPaddingValues = PaddingValues(PADDING_SMALL),
@@ -140,6 +146,15 @@ fun BikesScreen(
             }
         }
     }
+
+    DeleteDialog(
+        isOpenState = isDeleteDialogOpenState,
+        elementToDeleteName = bikeToDelete?.name ?: "",
+        onDelete = {
+            val deleteEvent = BikesEvent.DeleteBike(bikeToDelete?.id)
+            onEvent(deleteEvent)
+        }
+    )
 
 }
 

@@ -10,13 +10,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -35,6 +35,7 @@ import com.tam.mybike.ui.component.button.AddButton
 import com.tam.mybike.ui.component.button.ConfirmButton
 import com.tam.mybike.ui.component.element.RideDetails
 import com.tam.mybike.ui.component.element.RideElementBox
+import com.tam.mybike.ui.component.popup.DeleteDialog
 import com.tam.mybike.ui.component.text.RowTitle
 import com.tam.mybike.ui.component.text.Title
 import com.tam.mybike.ui.theme.BikeColors
@@ -72,6 +73,9 @@ fun RidesScreen(
         EmptyRidesScreen(goToAddRide = goToAddRide)
         return
     }
+
+    val isDeleteDialogOpenState = remember { mutableStateOf(false) }
+    var rideToDelete by remember { mutableStateOf<Ride?>(null) }
 
     LazyColumn(
         modifier = Modifier
@@ -122,8 +126,8 @@ fun RidesScreen(
                     ),
                     onEditMenuOption = goToEditRide,
                     onDeleteMenuOption = {
-                        val deleteEvent = RidesEvent.DeleteRide(ride.id)
-                        onEvent(deleteEvent)
+                        rideToDelete = ride
+                        isDeleteDialogOpenState.value = true
                     },
                     modifier = Modifier
                         .padding(bottom = PADDING_SMALL)
@@ -133,6 +137,15 @@ fun RidesScreen(
 
         }
     }
+
+    DeleteDialog(
+        isOpenState = isDeleteDialogOpenState,
+        elementToDeleteName = rideToDelete?.name ?: "",
+        onDelete = {
+            val deleteEvent = RidesEvent.DeleteRide(rideToDelete?.id)
+            onEvent(deleteEvent)
+        }
+    )
 
 }
 

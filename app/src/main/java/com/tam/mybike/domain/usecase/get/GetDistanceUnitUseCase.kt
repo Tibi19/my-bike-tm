@@ -8,7 +8,7 @@ class GetDistanceUnitUseCase @Inject constructor(
     private val repository: Repository
 ) {
 
-    suspend operator fun invoke(): DistanceUnit =
+    operator fun invoke(): DistanceUnit =
         repository.getSettingsDistanceUnit()
 
 }

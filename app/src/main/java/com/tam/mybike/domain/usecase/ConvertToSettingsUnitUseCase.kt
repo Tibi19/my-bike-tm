@@ -12,7 +12,7 @@ class ConvertToSettingsUnitUseCase @Inject constructor(
     private val getDistanceUnit: GetDistanceUnitUseCase
 ) {
 
-    suspend operator fun invoke(distance: Distance): Distance =
+    operator fun invoke(distance: Distance): Distance =
         when (val settingsDistanceUnit = getDistanceUnit()) {
             distance.unit -> distance
             DistanceUnit.KM ->

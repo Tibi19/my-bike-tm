@@ -14,7 +14,7 @@ class GetBikeProgressUseCase @Inject constructor(
     private val convertToSettingsUnit: ConvertToSettingsUnitUseCase
 ) {
 
-    suspend operator fun invoke(bike: Bike): Float {
+    operator fun invoke(bike: Bike): Float {
         val serviceIn = convertToSettingsUnit(bike.serviceIn)
         val maxProgressDistanceKm = Distance(
             amount = MAX_PROGRESS_DISTANCE_KM,

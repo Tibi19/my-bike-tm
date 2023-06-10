@@ -7,7 +7,7 @@ class GetDefaultBikeIdUseCase @Inject constructor(
     private val repository: Repository
 ) {
 
-    suspend operator fun invoke(): Int =
+    operator fun invoke(): Int =
         repository.getSettingsDefaultBikeId()
 
 }

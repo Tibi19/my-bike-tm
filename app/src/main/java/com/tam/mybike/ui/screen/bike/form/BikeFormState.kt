@@ -14,5 +14,5 @@ data class BikeFormState(
     val wheelSize: WheelSize = WheelSize.BIG,
     val distanceUnit: DistanceUnit = DistanceUnit.KM,
     val serviceIn: Distance? = null,
-    val isDefaultBike: Boolean = true
+    val isDefaultBike: Boolean = false
 )

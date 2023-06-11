@@ -25,7 +25,6 @@ import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.model.WheelSize
 import com.tam.mybike.ui.component.ScreenDarkPreview
-import com.tam.mybike.ui.component.ScreenPreview
 import com.tam.mybike.ui.component.button.ConfirmButton
 import com.tam.mybike.ui.component.field.ChoiceHolder
 import com.tam.mybike.ui.component.field.DateField
@@ -42,12 +41,16 @@ import com.tam.mybike.ui.theme.TEXT_ADD_RIDE
 import com.tam.mybike.ui.theme.TEXT_BIKE
 import com.tam.mybike.ui.theme.TEXT_CLOSE_ICON_CONTENT
 import com.tam.mybike.ui.theme.TEXT_DISTANCE
+import com.tam.mybike.ui.theme.TEXT_RIDE
 import com.tam.mybike.ui.theme.TEXT_RIDE_TITLE
 import com.tam.mybike.ui.theme.WEIGHT_FILL
 import com.tam.mybike.ui.util.suffix
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -156,11 +159,22 @@ fun RideFormScreen(
             confirmText = confirmText,
             enabled = isConfirmEnabled,
             onClick = {
-                onEvent(RideFormEvent.OnConfirmForm)
+                val fallbackTitle = getFallbackTitle(state.dateMillis)
+                val confirmEvent = RideFormEvent.OnConfirmForm(fallbackTitle)
+                onEvent(confirmEvent)
                 goToPreviousScreen()
             }
         )
     }
+}
+
+private fun getFallbackTitle(dateMillis: Long): String {
+    val date = LocalDateTime
+        .ofInstant(
+            Instant.ofEpochMilli(dateMillis),
+            ZoneId.systemDefault()
+        )
+    return "${date.dayOfWeek.name} ${date.dayOfMonth} $TEXT_RIDE"
 }
 
 @Preview

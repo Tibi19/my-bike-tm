@@ -5,17 +5,22 @@ import androidx.lifecycle.ViewModel
 import com.tam.mybike.domain.model.BikeType
 import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.WheelSize
+import com.tam.mybike.domain.usecase.get.GetSettingsUnitUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
-abstract class BikeFormViewModel : ViewModel() {
+abstract class BikeFormViewModel(
+    private val getSettingsUnit: GetSettingsUnitUseCase
+) : ViewModel() {
 
     protected val mutableState = MutableStateFlow(BikeFormState())
     val state = mutableState.asStateFlow()
 
     protected fun loadSettingsUnit() {
-        TODO("Not yet implemented")
+        mutableState.update {
+            it.copy(distanceUnit = getSettingsUnit())
+        }
     }
 
     abstract fun confirmForm()

@@ -9,5 +9,5 @@ sealed class RideFormEvent {
     data class OnChangeDistance(val newDistance: Distance?) : RideFormEvent()
     data class OnChangeDuration(val newDuration: Int?) : RideFormEvent()
     data class OnChangeDate(val newDate: Long) : RideFormEvent()
-    object OnConfirmForm : RideFormEvent()
+    data class OnConfirmForm(val fallbackTitle: String) : RideFormEvent()
 }

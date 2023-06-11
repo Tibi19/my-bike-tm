@@ -1,26 +1,44 @@
 package com.tam.mybike.ui.screen.ride.form
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.tam.mybike.domain.model.Bike
 import com.tam.mybike.domain.model.Distance
+import com.tam.mybike.domain.usecase.collect.CollectBikesUseCase
+import com.tam.mybike.domain.usecase.get.GetSettingsUnitUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-abstract class RideFormViewModel : ViewModel() {
+abstract class RideFormViewModel(
+    private val collectBikes: CollectBikesUseCase,
+    private val getSettingsUnit: GetSettingsUnitUseCase
+) : ViewModel() {
 
     protected val mutableState = MutableStateFlow(RideFormState())
     val state = mutableState.asStateFlow()
 
-    protected fun loadBikes() {
-        TODO("Not yet implemented")
-    }
-
     protected fun loadSettingsUnit() {
-        TODO("Not yet implemented")
+        mutableState.update {
+            it.copy(distanceUnit = getSettingsUnit())
+        }
     }
 
-    protected abstract fun confirmForm()
+    protected fun observeBikes() =
+        viewModelScope.launch {
+            collectBikes { bikes ->
+                updateBikes(bikes)
+            }
+        }
+
+    private fun updateBikes(bikes: List<Bike>) {
+        mutableState.update {
+            it.copy(bikes = bikes)
+        }
+    }
+
+    protected abstract fun confirmForm(fallbackTitle: String)
 
     fun onEvent(event: RideFormEvent) =
         when (event) {
@@ -29,7 +47,7 @@ abstract class RideFormViewModel : ViewModel() {
             is RideFormEvent.OnChangeDistance -> changeDistance(event.newDistance)
             is RideFormEvent.OnChangeDuration -> changeDuration(event.newDuration)
             is RideFormEvent.OnChangeTitle -> changeTitle(event.newTitle)
-            is RideFormEvent.OnConfirmForm -> confirmForm()
+            is RideFormEvent.OnConfirmForm -> confirmForm(event.fallbackTitle)
         }
 
     private fun changeBike(newBike: Bike) {

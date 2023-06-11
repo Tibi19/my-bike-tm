@@ -10,5 +10,6 @@ import java.util.SortedMap
 data class RidesState(
     val ridesByMonth: SortedMap<Int, List<Ride>> = sortedMapOf(),
     val bikeTypeToDistanceMap: Map<BikeType, Distance> = emptyMap(),
-    val totalDistance: Distance = Distance(0, DistanceUnit.DEFAULT)
+    val distanceUnit: DistanceUnit = DistanceUnit.DEFAULT,
+    val totalDistance: Distance = Distance(0, distanceUnit)
 )

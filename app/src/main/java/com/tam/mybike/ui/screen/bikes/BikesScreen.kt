@@ -61,6 +61,7 @@ import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_SMALL
 import com.tam.mybike.ui.theme.PADDING_XX_LARGE
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
+import com.tam.mybike.ui.theme.SurfaceStatusBarEffect
 import com.tam.mybike.ui.theme.TEXT_ADD_BIKE
 import com.tam.mybike.ui.theme.TEXT_BIKE
 import com.tam.mybike.ui.theme.TEXT_BIKES
@@ -87,6 +88,8 @@ fun BikesScreen(
     goToBikeDetails: (Int) -> Unit
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
+
+    MaterialTheme.SurfaceStatusBarEffect()
 
     if (state.isLoading) {
         Column(

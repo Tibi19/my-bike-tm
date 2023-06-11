@@ -37,6 +37,7 @@ import com.tam.mybike.ui.theme.PADDING_SMALL
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.PATTERN_REGEX_LETTERS
 import com.tam.mybike.ui.theme.SIZE_BIKE_CHOICE_ICON
+import com.tam.mybike.ui.theme.SurfaceVariantStatusBarEffect
 import com.tam.mybike.ui.theme.TEXT_BIKE_CHOICE_ICON_CONTENT
 import com.tam.mybike.ui.theme.TEXT_DEFAULT_BIKE
 import com.tam.mybike.ui.theme.TEXT_DISTANCE_UNITS
@@ -54,6 +55,8 @@ fun SettingsScreen(
     onEvent: (SettingsEvent) -> Unit
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
+
+    MaterialTheme.SurfaceVariantStatusBarEffect()
 
     Column(
         modifier = Modifier

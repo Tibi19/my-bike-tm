@@ -54,6 +54,7 @@ import com.tam.mybike.ui.theme.PADDING_XX_SMALL
 import com.tam.mybike.ui.theme.PADDING_X_LARGE
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.SIZE_BIKE_DETAILS_BACK_ICON
+import com.tam.mybike.ui.theme.SurfaceStatusBarEffect
 import com.tam.mybike.ui.theme.TEXT_BACK_ICON_CONTENT
 import com.tam.mybike.ui.theme.TEXT_CONNECTOR_IN
 import com.tam.mybike.ui.theme.TEXT_INCHES_NOTATION
@@ -83,6 +84,8 @@ fun BikeDetailsScreen(
     val isDeleteBikeOpenState = remember { mutableStateOf(false) }
     val isDeleteRideOpenState = remember { mutableStateOf(false) }
     var rideToDelete by remember { mutableStateOf<Ride?>(null) }
+
+    MaterialTheme.SurfaceStatusBarEffect()
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -251,7 +254,7 @@ private fun BikeDetailsScreenPreview() =
         val mockState = BikeDetailsState(
             bike = mockBike,
             progress = (maxDistance - mockBike.serviceIn.amount) / maxDistance,
-            rides = emptyList(),
+            rides = mockRides,
             totalRidesDistance = Distance(450, DistanceUnit.KM)
         )
         val stateFlow = remember {

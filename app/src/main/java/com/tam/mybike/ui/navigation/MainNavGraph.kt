@@ -148,11 +148,3 @@ fun MainNavGraph(
         }
 
     }
-
-fun NavHostController.navigateAndReplaceStartRoute(newStartRoute: String) {
-    val currentRoute = currentDestination?.route ?: return
-    if (currentRoute == newStartRoute) return
-
-    popBackStack(currentRoute, true)
-    navigate(newStartRoute)
-}

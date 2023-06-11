@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -43,6 +42,7 @@ import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_SMALL
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.SIZE_BIKE_CHOICE_ICON
+import com.tam.mybike.ui.theme.SurfaceVariantStatusBarEffect
 import com.tam.mybike.ui.theme.TEXT_ADD_RIDE
 import com.tam.mybike.ui.theme.TEXT_BIKE
 import com.tam.mybike.ui.theme.TEXT_BIKE_CHOICE_ICON_CONTENT
@@ -58,7 +58,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,7 +70,9 @@ fun RideFormScreen(
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
     val dateState = rememberDatePickerState(state.dateMillis)
-    
+
+    MaterialTheme.SurfaceVariantStatusBarEffect()
+
     Column(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.surfaceVariant)

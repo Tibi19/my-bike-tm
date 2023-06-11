@@ -16,10 +16,10 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.tam.mybike.R
+import com.tam.mybike.ui.navigation.util.navigateAndReplaceStartRoute
 import com.tam.mybike.ui.theme.BlueLight
 import com.tam.mybike.ui.theme.DURATION_BOTTOM_BAR_TEXT_COLOR_ANIMATION
 import com.tam.mybike.ui.theme.HEIGHT_BOTTOM_BAR
@@ -29,7 +29,7 @@ import com.tam.mybike.ui.theme.TEXT_BOTTOM_BAR_ITEM_CONTENT_START
 import com.tam.mybike.ui.theme.TEXT_RIDES
 import com.tam.mybike.ui.theme.TEXT_SETTINGS
 
-val destinationsWithBottomBar = listOf(
+private val destinationsWithBottomBar = listOf(
     Destination.Bikes,
     Destination.Rides,
     Destination.Settings

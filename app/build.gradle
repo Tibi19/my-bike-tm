@@ -90,4 +90,7 @@ dependencies {
     // Number Picker
     implementation "com.chargemap.compose:numberpicker:1.0.3"
 
+    // Accompanist system ui controller
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.31.3-beta"
+
 }

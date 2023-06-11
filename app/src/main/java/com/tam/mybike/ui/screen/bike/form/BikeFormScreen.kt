@@ -58,6 +58,7 @@ import com.tam.mybike.ui.theme.PADDING_XX_SMALL
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.RATIO_BIKE_WIDTH_TO_SCREEN_WIDTH
 import com.tam.mybike.ui.theme.SIZE_PAGER_INDICATOR
+import com.tam.mybike.ui.theme.SurfaceStatusBarEffect
 import com.tam.mybike.ui.theme.TEXT_ADD_BIKE
 import com.tam.mybike.ui.theme.TEXT_BIKE_NAME
 import com.tam.mybike.ui.theme.TEXT_CLOSE_ICON_CONTENT
@@ -81,6 +82,8 @@ fun BikeFormScreen(
     goToPreviousScreen: () -> Unit
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
+
+    MaterialTheme.SurfaceStatusBarEffect()
 
     WaveColumn(
         waveBackgroundColor = MaterialTheme.colorScheme.surfaceVariant,

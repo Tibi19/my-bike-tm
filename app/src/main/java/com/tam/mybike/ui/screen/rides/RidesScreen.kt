@@ -1,7 +1,6 @@
 package com.tam.mybike.ui.screen.rides
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -43,6 +42,7 @@ import com.tam.mybike.ui.theme.BikeColors
 import com.tam.mybike.ui.theme.PADDING_LARGE
 import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_SMALL
+import com.tam.mybike.ui.theme.SurfaceStatusBarEffect
 import com.tam.mybike.ui.theme.TEXT_ADD_RIDE
 import com.tam.mybike.ui.theme.TEXT_MISSING_RIDES_CONTENT
 import com.tam.mybike.ui.theme.TEXT_MISSING_RIDES_DOTTED_LINE_CONTENT
@@ -69,6 +69,8 @@ fun RidesScreen(
     goToEditRide: (Int) -> Unit
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
+
+    MaterialTheme.SurfaceStatusBarEffect()
 
     if (state.ridesByMonth.isEmpty()) {
         EmptyRidesScreen(goToAddRide = goToAddRide)

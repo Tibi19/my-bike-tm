@@ -22,9 +22,3 @@ sealed class Destination(val route: String) {
         fun createRoute(rideId: Int) = "edit/ride/$rideId"
     }
 }
-
-val destinationsWithBottomBar = listOf(
-    Destination.Bikes,
-    Destination.Rides,
-    Destination.Settings
-)

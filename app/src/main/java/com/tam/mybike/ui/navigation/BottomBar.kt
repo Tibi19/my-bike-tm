@@ -29,6 +29,12 @@ import com.tam.mybike.ui.theme.TEXT_BOTTOM_BAR_ITEM_CONTENT_START
 import com.tam.mybike.ui.theme.TEXT_RIDES
 import com.tam.mybike.ui.theme.TEXT_SETTINGS
 
+val destinationsWithBottomBar = listOf(
+    Destination.Bikes,
+    Destination.Rides,
+    Destination.Settings
+)
+
 @Composable
 fun BottomBar(navController: NavHostController) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()

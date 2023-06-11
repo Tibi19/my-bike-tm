@@ -22,8 +22,10 @@ interface Repository {
     fun saveSettingsDistanceUnit(distanceUnit: DistanceUnit)
     fun saveSettingsDefaultBikeId(bikeId: Int)
     fun saveSettingsReminderDistance(distance: Distance)
+    fun saveSettingsIsReminderOn(isReminderOn: Boolean)
     fun getSettingsDistanceUnit(): DistanceUnit
     fun getSettingsDefaultBikeId(): Int
     fun getSettingsReminderDistance(): Distance
+    fun getSettingsIsReminderOn(): Boolean
 
 }

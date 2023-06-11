@@ -57,23 +57,31 @@ class RepositoryImpl @Inject constructor(
         databaseSource.getBikeRidesFlow(bikeId)
 
     override fun saveSettingsDistanceUnit(distanceUnit: DistanceUnit) {
-        settingsSource.saveSettingsDistanceUnit(distanceUnit)
+        settingsSource.saveDistanceUnit(distanceUnit)
     }
 
     override fun saveSettingsDefaultBikeId(bikeId: Int) {
-        settingsSource.saveSettingsDefaultBikeId(bikeId)
+        settingsSource.saveDefaultBikeId(bikeId)
     }
 
     override fun saveSettingsReminderDistance(distance: Distance) {
-        settingsSource.saveSettingsReminderDistance(distance)
+        settingsSource.saveReminderDistance(distance)
+    }
+
+    override fun saveSettingsIsReminderOn(isReminderOn: Boolean) {
+        settingsSource.saveIsReminderOn(isReminderOn)
     }
 
     override fun getSettingsDistanceUnit(): DistanceUnit =
-        settingsSource.getSettingsDistanceUnit()
+        settingsSource.getDistanceUnit()
 
     override fun getSettingsDefaultBikeId(): Int =
-        settingsSource.getSettingsDefaultBikeId()
+        settingsSource.getDefaultBikeId()
 
     override fun getSettingsReminderDistance(): Distance =
-        settingsSource.getSettingsReminderDistance()
+        settingsSource.getReminderDistance()
+
+    override fun getSettingsIsReminderOn(): Boolean =
+        settingsSource.getIsReminderOn()
+    
 }

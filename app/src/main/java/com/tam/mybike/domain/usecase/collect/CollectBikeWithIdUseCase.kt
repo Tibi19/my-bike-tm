@@ -9,6 +9,7 @@ class CollectBikeWithIdUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(bikeId: Int, onCollect: (Bike) -> Unit) {
+        if (bikeId < 0) return
         repository
             .getBikeWithIdFlow(bikeId)
             .collect { bike ->

@@ -4,7 +4,7 @@ import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.repository.Repository
 import javax.inject.Inject
 
-class SaveDistanceUnitUseCase @Inject constructor(
+class SaveSettingsUnitUseCase @Inject constructor(
     private val repository: Repository
 ) {
 

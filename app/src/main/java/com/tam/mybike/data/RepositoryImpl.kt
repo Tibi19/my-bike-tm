@@ -83,5 +83,5 @@ class RepositoryImpl @Inject constructor(
 
     override fun getSettingsIsReminderOn(): Boolean =
         settingsSource.getIsReminderOn()
-    
+
 }

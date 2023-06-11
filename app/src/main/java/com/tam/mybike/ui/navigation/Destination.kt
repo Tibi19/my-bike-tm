@@ -4,6 +4,7 @@ const val ARG_BIKE_ID = "bike_id"
 const val ARG_RIDE_ID = "ride_id"
 
 sealed class Destination(val route: String) {
+    object Splash: Destination("splash")
     object Bikes : Destination("bikes")
     object Rides : Destination("rides")
     object Settings : Destination("settings")

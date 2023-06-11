@@ -74,6 +74,8 @@ const val TEXT_NO_BIKE_RIDES = "No rides have been added for this bike."
 const val TEXT_BOTTOM_BAR_ITEM_CONTENT_START = "Navigate to"
 const val TEXT_BOTTOM_BAR_ITEM_CONTENT_END = "screen."
 const val TEXT_BIKE_CHOICE_ICON_CONTENT = "Bike choice."
+const val TEXT_SPLASH_BACKGROUND_CONTENT = "Splash screen."
+const val TEXT_SPLASH_LOGO_CONTENT = "MyBike Logo."
 
 const val PATTERN_DATE = "dd.MM.uuuu"
 const val PATTERN_NUMBER = "#,###"

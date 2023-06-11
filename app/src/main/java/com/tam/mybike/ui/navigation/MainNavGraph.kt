@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.tam.mybike.ui.navigation.util.navigateAndReplaceStartRoute
 import com.tam.mybike.ui.screen.bike.add.AddBikeScreen
 import com.tam.mybike.ui.screen.bike.add.AddBikeViewModel
 import com.tam.mybike.ui.screen.bike.details.BikeDetailsScreen
@@ -24,6 +25,7 @@ import com.tam.mybike.ui.screen.rides.RidesScreen
 import com.tam.mybike.ui.screen.rides.RidesViewModel
 import com.tam.mybike.ui.screen.settings.SettingsScreen
 import com.tam.mybike.ui.screen.settings.SettingsViewModel
+import com.tam.mybike.ui.screen.splash.SplashScreen
 
 @Composable
 fun MainNavGraph(
@@ -32,9 +34,18 @@ fun MainNavGraph(
 ) =
     NavHost(
         navController = navController,
-        startDestination = Destination.Bikes.route,
+        startDestination = Destination.Splash.route,
         modifier = modifier
     ) {
+        composable(route = Destination.Splash.route) {
+            SplashScreen(
+                goToBikesScreen = {
+                    val bikesRoute = Destination.Bikes.route
+                    navController.navigateAndReplaceStartRoute(bikesRoute)
+                }
+            )
+        }
+
         composable(route = Destination.Bikes.route) {
             val bikesViewModel = hiltViewModel<BikesViewModel>()
             BikesScreen(

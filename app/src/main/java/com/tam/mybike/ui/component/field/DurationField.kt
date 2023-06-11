@@ -1,5 +1,6 @@
 package com.tam.mybike.ui.component.field
 
+import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -49,7 +50,8 @@ fun DurationField(
     isRequired: Boolean = true,
 ) {
     val isDurationPickerOpenState = remember { mutableStateOf(false) }
-    var isAlertOn by remember { mutableStateOf(false) }
+    var wasDurationDialogClosed by remember { mutableStateOf(false) }
+    val isAlertOn = duration.isEmpty() && wasDurationDialogClosed
     val borderColor by animateColorAsState(
         targetValue = if (isAlertOn) {
             MaterialTheme.colorScheme.error
@@ -78,7 +80,7 @@ fun DurationField(
         duration = duration,
         onDurationChange = onDurationChange,
         onClose = {
-            isAlertOn = duration.isEmpty()
+            wasDurationDialogClosed = true
         }
     )
 }

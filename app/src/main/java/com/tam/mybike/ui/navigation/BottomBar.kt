@@ -121,10 +121,7 @@ private fun RowScope.BottomBarItem(
             )
         },
         onClick = {
-            navController.navigate(itemRoute) {
-                popUpTo(navController.graph.findStartDestination().id)
-                launchSingleTop = true
-            }
+            navController.navigateAndReplaceStartRoute(itemRoute)
         }
     )
 

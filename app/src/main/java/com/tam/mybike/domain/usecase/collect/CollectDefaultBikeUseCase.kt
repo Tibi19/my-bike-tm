@@ -9,7 +9,7 @@ class CollectDefaultBikeUseCase @Inject constructor(
     private val collectBikeWithId: CollectBikeWithIdUseCase
 ) {
 
-    suspend operator fun invoke(onCollect: (Bike) -> Unit) {
+    suspend operator fun invoke(onCollect: (Bike?) -> Unit) {
         val defaultBikeId = getDefaultBikeId()
         collectBikeWithId(defaultBikeId, onCollect)
     }

@@ -40,6 +40,7 @@ class EditBikeViewModel @Inject constructor(
     private fun loadBike(bikeId: Int) =
         viewModelScope.launch {
             collectBike(bikeId) { bike ->
+                bike ?: return@collectBike
                 val bikeWithSettingsUnit = getBikeWithSettingsUnit(bike)
                 updateStateWithBike(bikeWithSettingsUnit)
                 this.coroutineContext.job.cancel()

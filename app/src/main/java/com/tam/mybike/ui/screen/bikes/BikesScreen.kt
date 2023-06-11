@@ -2,17 +2,23 @@ package com.tam.mybike.ui.screen.bikes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -77,9 +83,23 @@ fun BikesScreen(
     stateFlow: StateFlow<BikesState>,
     onEvent: (BikesEvent) -> Unit,
     goToAddBike: () -> Unit,
-    goToEditBike: () -> Unit
+    goToEditBike: (Int) -> Unit,
+    goToBikeDetails: (Int) -> Unit
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
+
+    if (state.isLoading) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxSize()
+        ) {
+            CircularProgressIndicator(
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+        return
+    }
 
     if (state.bikes.isEmpty()) {
         EmptyBikesScreen(goToAddBike = goToAddBike)
@@ -103,7 +123,7 @@ fun BikesScreen(
 
         items(state.bikes) {bike ->
             ElementBox(
-                onEditMenuOption = goToEditBike,
+                onEditMenuOption = { goToEditBike(bike.id) },
                 onDeleteMenuOption = {
                     bikeToDelete = bike
                     isDeleteDialogOpenState.value = true
@@ -111,7 +131,9 @@ fun BikesScreen(
                 innerPaddingValues = PaddingValues(PADDING_BIKE_BOX_INNER_PADDING),
                 optionsPaddingValues = PaddingValues(PADDING_SMALL),
                 backgroundColor = MaterialTheme.colorScheme.surfaceVariant,
-                modifier = Modifier.padding(bottom = PADDING_SMALL)
+                modifier = Modifier
+                    .padding(bottom = PADDING_SMALL)
+                    .clickable { goToBikeDetails(bike.id) }
             ) {
                 WaveColumn(
                     waveBackgroundColor = MaterialTheme.colorScheme.background,
@@ -160,10 +182,15 @@ fun BikesScreen(
 
 @Composable
 private fun EmptyBikesScreen(goToAddBike: () -> Unit) =
-    Column(modifier = Modifier.padding(horizontal = PADDING_MEDIUM, vertical = PADDING_SMALL)) {
+    Column(
+        modifier = Modifier
+            .verticalScroll(state = rememberScrollState())
+            .padding(horizontal = PADDING_MEDIUM)
+            .padding(bottom = PADDING_SMALL)
+    ) {
         Title(
             text = TEXT_BIKES,
-            modifier = Modifier.padding(bottom = PADDING_LARGE)
+            modifier = Modifier.padding(top = PADDING_SMALL, bottom = PADDING_LARGE)
         )
         Image(
             painter = painterResource(id = R.drawable.missing_bike_card),
@@ -236,7 +263,8 @@ private fun BikesScreenPreview() =
                 val maxDistance = 1000f
                 bike.id to ((maxDistance - bike.serviceIn.amount) / maxDistance)
             },
-            distanceUnit = DistanceUnit.KM
+            distanceUnit = DistanceUnit.KM,
+            isLoading = false
         )
         val stateFlow = remember {
             MutableStateFlow(mockState).asStateFlow()
@@ -245,7 +273,8 @@ private fun BikesScreenPreview() =
             stateFlow = stateFlow,
             onEvent = {},
             goToAddBike = {},
-            goToEditBike = {}
+            goToEditBike = {},
+            goToBikeDetails = {}
         )
     }
 

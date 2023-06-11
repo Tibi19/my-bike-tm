@@ -58,6 +58,7 @@ class BikeDetailsViewModel @Inject constructor(
     private fun observeBike(bikeId: Int) =
         viewModelScope.launch {
             collectBike(bikeId) { bike ->
+                bike ?: return@collectBike
                 val bikeWithSettingsUnit = getBikeWithSettingsUnit(bike)
                 updateBike(bikeWithSettingsUnit)
                 updateProgress(bikeWithSettingsUnit)

@@ -7,4 +7,5 @@ data class BikesState(
     val bikes: List<Bike> = emptyList(),
     val bikeToProgressMap: Map<Int, Float> = emptyMap(),
     val distanceUnit: DistanceUnit = DistanceUnit.DEFAULT,
+    val isLoading: Boolean = true
 )

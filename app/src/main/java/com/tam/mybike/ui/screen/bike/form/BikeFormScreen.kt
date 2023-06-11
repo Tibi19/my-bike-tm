@@ -17,6 +17,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -123,7 +125,9 @@ fun BikeFormScreen(
             },
             label = TEXT_BIKE_NAME,
             isRequired = true,
-            modifier = Modifier.padding(horizontal = PADDING_MEDIUM)
+            modifier = Modifier
+                .padding(horizontal = PADDING_MEDIUM)
+                .padding(bottom = PADDING_SMALL)
         )
 
         DropdownField(
@@ -144,7 +148,9 @@ fun BikeFormScreen(
             },
             label = TEXT_WHEEL_SIZE,
             dropdownHorizontalPadding = PADDING_MEDIUM,
-            modifier = Modifier.padding(horizontal = PADDING_MEDIUM)
+            modifier = Modifier
+                .padding(horizontal = PADDING_MEDIUM)
+                .padding(bottom = PADDING_SMALL)
         )
 
         InputField(
@@ -158,6 +164,8 @@ fun BikeFormScreen(
                 val serviceInChangeEvent = BikeFormEvent.OnServiceInChange(newServiceIn)
                 onEvent(serviceInChangeEvent)
             },
+            keyboardOptions = KeyboardOptions.Default
+                .copy(keyboardType = KeyboardType.Number),
             label = TEXT_SERVICE_IN,
             isRequired = true,
             trailingText = state.distanceUnit.suffix.uppercase(),

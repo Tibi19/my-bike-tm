@@ -73,6 +73,7 @@ const val TEXT_TOTAL_RIDES_DISTANCE = "Total Rides Distance"
 const val TEXT_NO_BIKE_RIDES = "No rides have been added for this bike."
 const val TEXT_BOTTOM_BAR_ITEM_CONTENT_START = "Navigate to"
 const val TEXT_BOTTOM_BAR_ITEM_CONTENT_END = "screen."
+const val TEXT_BIKE_CHOICE_ICON_CONTENT = "Bike choice."
 
 const val PATTERN_DATE = "dd.MM.uuuu"
 const val PATTERN_NUMBER = "#,###"

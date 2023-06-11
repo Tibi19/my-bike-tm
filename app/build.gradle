@@ -70,6 +70,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$compose_lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$compose_lifecycle_version"
 
+    // Compose Navigation
+    implementation "androidx.navigation:navigation-compose:2.6.0"
+
     // Splash Screen
     implementation 'androidx.core:core-splashscreen:1.0.1'
 

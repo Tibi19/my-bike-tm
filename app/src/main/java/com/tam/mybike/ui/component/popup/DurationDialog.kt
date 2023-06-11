@@ -67,12 +67,11 @@ fun DurationDialog(
                     confirmText = TEXT_OK,
                     onConfirm = {
                         isOpenState.value = false
-                        onDurationChange(
-                            DurationState(
-                                hours = hoursState.value,
-                                minutes = minutesState.value
-                            )
+                        val newDuration = DurationState(
+                            hours = hoursState.value,
+                            minutes = minutesState.value
                         )
+                        onDurationChange(newDuration)
                         onClose()
                     },
                     onClose = {

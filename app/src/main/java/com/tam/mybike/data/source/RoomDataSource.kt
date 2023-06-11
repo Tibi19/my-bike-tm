@@ -59,11 +59,11 @@ class RoomDataSource @Inject constructor(
                 rideEntities.toRides()
             }
 
-    override fun getBikeWithIdFlow(bikeId: Int): Flow<Bike> =
+    override fun getBikeWithIdFlow(bikeId: Int): Flow<Bike?> =
         bikeDao
             .getBikeWithId(bikeId)
             .map { bikeEntity ->
-                bikeEntity.toBike()
+                bikeEntity?.toBike()
             }
 
     override fun getRideWithIdFlow(rideId: Int): Flow<Ride> =

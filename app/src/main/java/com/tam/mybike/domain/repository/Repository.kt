@@ -16,7 +16,7 @@ interface Repository {
     suspend fun deleteRide(rideId: Int)
     fun getBikesFlow(): Flow<List<Bike>>
     fun getRidesFlow(): Flow<List<Ride>>
-    fun getBikeWithIdFlow(bikeId: Int): Flow<Bike>
+    fun getBikeWithIdFlow(bikeId: Int): Flow<Bike?>
     fun getRideWithIdFlow(rideId: Int): Flow<Ride>
     fun getBikeRidesFlow(bikeId: Int): Flow<List<Ride>>
     fun saveSettingsDistanceUnit(distanceUnit: DistanceUnit)

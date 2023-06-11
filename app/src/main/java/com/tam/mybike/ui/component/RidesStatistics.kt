@@ -1,4 +1,4 @@
-package com.tam.mybike.ui.component
+ package com.tam.mybike.ui.component
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -286,11 +286,11 @@ private fun RidesStatisticsPreview() =
         RidesStatistics(
             bikeTypeToDistanceMap = mapOf(
                 BikeType.ROADBIKE to Distance(8500, DistanceUnit.KM),
-                BikeType.MTB to Distance(2650, DistanceUnit.KM),
-                BikeType.HYBRID to Distance(3420, DistanceUnit.KM),
-                BikeType.ELECTRIC to Distance(11000, DistanceUnit.KM)
+                BikeType.MTB to Distance(0, DistanceUnit.KM),
+                BikeType.HYBRID to Distance(0, DistanceUnit.KM),
+                BikeType.ELECTRIC to Distance(0, DistanceUnit.KM)
             ),
-            totalDistance = Distance(25570, DistanceUnit.KM),
+            totalDistance = Distance(8500, DistanceUnit.KM),
             modifier = Modifier.padding(PADDING_MEDIUM)
         )
     }

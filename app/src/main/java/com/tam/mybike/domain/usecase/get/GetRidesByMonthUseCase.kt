@@ -11,6 +11,7 @@ class GetRidesByMonthUseCase @Inject constructor() {
 
     operator fun invoke(rides: List<Ride>): SortedMap<Int, List<Ride>> =
         rides
+            .sortedByDescending { it.dateMillis }
             .groupBy { ride ->
                 LocalDateTime
                     .ofInstant(
@@ -20,7 +21,7 @@ class GetRidesByMonthUseCase @Inject constructor() {
                     .monthValue
             }
             .toSortedMap(
-                compareBy { it }
+                compareByDescending { it }
             )
 
 }

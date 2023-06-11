@@ -1,8 +1,12 @@
 package com.tam.mybike.ui.screen.bike.details
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -80,109 +84,125 @@ fun BikeDetailsScreen(
     val isDeleteRideOpenState = remember { mutableStateOf(false) }
     var rideToDelete by remember { mutableStateOf<Ride?>(null) }
 
-    WaveColumn(
-        waveBackgroundColor = MaterialTheme.colorScheme.surfaceVariant,
-        offsetWaveY = OFFSET_Y_BIKE_DETAILS_WAVE,
-        snapToScreenHeight = false,
-        isContentOverflowingScreenHeight = true,
-        modifier = Modifier.padding(
-            top = PADDING_SMALL,
-            start = PADDING_MEDIUM,
-            end = PADDING_MEDIUM
-        )
+    Column(
+        modifier = Modifier.fillMaxSize()
     ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.padding(bottom = PADDING_XX_LARGE)
+
+        WaveColumn(
+            waveBackgroundColor = MaterialTheme.colorScheme.surfaceVariant,
+            offsetWaveY = OFFSET_Y_BIKE_DETAILS_WAVE,
+            snapToScreenHeight = false,
+            isContentOverflowingScreenHeight = true,
+            modifier = Modifier.padding(horizontal = PADDING_MEDIUM)
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.arrow_back),
-                contentDescription = TEXT_BACK_ICON_CONTENT,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
-                    .padding(end = PADDING_X_LARGE)
-                    .size(SIZE_BIKE_DETAILS_BACK_ICON)
-                    .clickable { goToPreviousScreen() }
+                    .padding(
+                        top = PADDING_SMALL,
+                        bottom = PADDING_XX_LARGE
+                    )
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.arrow_back),
+                    contentDescription = TEXT_BACK_ICON_CONTENT,
+                    modifier = Modifier
+                        .padding(end = PADDING_X_LARGE)
+                        .size(SIZE_BIKE_DETAILS_BACK_ICON)
+                        .clickable { goToPreviousScreen() }
+                )
+                RowTitle(
+                    text = bike.name,
+                    modifier = Modifier.offset(y = -PADDING_XX_SMALL)
+                )
+                Options(
+                    onEditMenuOption = { goToEditBike(bike.id) },
+                    onDeleteMenuOption = { isDeleteBikeOpenState.value = true },
+                )
+            }
+
+            BikeImage(
+                bikeType = bike.type,
+                wheelSize = bike.wheelSize,
+                color = Color(bike.colorHex),
+                modifier = Modifier
+                    .padding(top = PADDING_SMALL)
+                    .align(Alignment.CenterHorizontally)
             )
-            RowTitle(
-                text = bike.name,
-                modifier = Modifier.offset(y = -PADDING_XX_SMALL)
+
+            LargeDetails(
+                intro = TEXT_WHEELS,
+                description = "${bike.wheelSize.inches}$TEXT_INCHES_NOTATION"
             )
-            Options(
-                onEditMenuOption = { goToEditBike(bike.id) },
-                onDeleteMenuOption = { isDeleteBikeOpenState.value = true },
+            LargeDetails(
+                intro = TEXT_SERVICE,
+                description = "${bike.serviceIn.amount}${bike.serviceIn.unit.suffix}",
+                connector = TEXT_CONNECTOR_IN
             )
-        }
 
-        BikeImage(
-            bikeType = bike.type,
-            wheelSize = bike.wheelSize,
-            color = Color(bike.colorHex),
-            modifier = Modifier
-                .padding(top = PADDING_SMALL)
-                .align(Alignment.CenterHorizontally)
-        )
+            WrenchProgressBar(
+                progress = state.progress,
+                modifier = Modifier.padding(top = PADDING_SMALL, bottom = PADDING_X_SMALL)
+            )
 
-        LargeDetails(
-            intro = TEXT_WHEELS,
-            description = "${bike.wheelSize.inches}$TEXT_INCHES_NOTATION"
-        )
-        LargeDetails(
-            intro = TEXT_SERVICE,
-            description = "${bike.serviceIn.amount}${bike.serviceIn.unit.suffix}",
-            connector = TEXT_CONNECTOR_IN
-        )
-
-        WrenchProgressBar(
-            progress = state.progress,
-            modifier = Modifier.padding(top = PADDING_SMALL, bottom = PADDING_X_SMALL)
-        )
-
-        Text(
-            text = "$TEXT_RIDES ${state.rides.size}",
-            style = MaterialTheme.typography.titleMedium
-        )
-        LargeDetails(
-            intro = TEXT_TOTAL_RIDES_DISTANCE,
-            description = "${state.totalRidesDistance.amount}${state.totalRidesDistance.unit.suffix}",
-            connector = "",
-            modifier = Modifier.padding(bottom = PADDING_LARGE)
-        )
-
-        Title(
-            text = TEXT_RIDES.uppercase(),
-            style = MaterialTheme.typography.titleLarge
-                .copy(color = MaterialTheme.colorScheme.tertiary),
-            modifier = Modifier.padding(bottom = PADDING_SMALL)
-        )
-
-        if (state.rides.isEmpty()) {
             Text(
-                text = TEXT_NO_BIKE_RIDES,
-                style = MaterialTheme.typography.headlineMedium
+                text = "$TEXT_RIDES ${state.rides.size}",
+                style = MaterialTheme.typography.titleMedium
             )
-            return@WaveColumn
-        }
-
-        state.rides.forEach { ride ->
-            RideElementBox(
-                rideDetails = RideDetails(
-                    title = ride.name,
-                    bikeName = ride.bike.name,
-                    distance = "${ride.distance.amount}${ride.distance.unit.suffix}",
-                    duration = ride.minutes.toDurationString(),
-                    date = formatDate(ride.dateMillis)
-                ),
-                onEditMenuOption = { goToEditRide(ride.id) },
-                onDeleteMenuOption = {
-                    rideToDelete = ride
-                    isDeleteRideOpenState.value = true
-                },
-                backgroundColor = MaterialTheme.colorScheme.background,
-                modifier = Modifier.fillMaxWidth()
+            LargeDetails(
+                intro = TEXT_TOTAL_RIDES_DISTANCE,
+                description = "${state.totalRidesDistance.amount}${state.totalRidesDistance.unit.suffix}",
+                connector = "",
+                modifier = Modifier.padding(bottom = PADDING_LARGE)
             )
 
-            Spacer(modifier = Modifier.height(PADDING_SMALL))
+            Title(
+                text = TEXT_RIDES.uppercase(),
+                style = MaterialTheme.typography.titleLarge
+                    .copy(color = MaterialTheme.colorScheme.tertiary),
+                modifier = Modifier.padding(bottom = PADDING_SMALL)
+            )
+
+            if (state.rides.isEmpty()) {
+                Text(
+                    text = TEXT_NO_BIKE_RIDES,
+                    style = MaterialTheme.typography.headlineMedium
+                )
+                return@WaveColumn
+            }
+
+            state.rides.forEach { ride ->
+                RideElementBox(
+                    rideDetails = RideDetails(
+                        title = ride.name,
+                        bikeName = ride.bike.name,
+                        distance = "${ride.distance.amount}${ride.distance.unit.suffix}",
+                        duration = ride.minutes.toDurationString(),
+                        date = formatDate(ride.dateMillis)
+                    ),
+                    onEditMenuOption = { goToEditRide(ride.id) },
+                    onDeleteMenuOption = {
+                        rideToDelete = ride
+                        isDeleteRideOpenState.value = true
+                    },
+                    backgroundColor = MaterialTheme.colorScheme.background,
+                    modifier = Modifier.fillMaxWidth()
+                )
+
+                Spacer(modifier = Modifier.height(PADDING_SMALL))
+            }
+
         }
+
+        // WaveColumn is a rebel teenager who only does what it wants.
+        // For example, if there are not enough elements inside it to fill the screen height,
+        // WaveColumn will not do so, even with fillMaxSize().
+        // This box is here to fill the screen height background when WaveColumn just doesn't feel like it
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = MaterialTheme.colorScheme.surfaceVariant)
+        )
     }
 
     DeleteDialog(
@@ -191,6 +211,7 @@ fun BikeDetailsScreen(
         onDelete = {
             val deleteBikeEvent = BikeDetailsEvent.OnBikeDelete(bike.id)
             onEvent(deleteBikeEvent)
+            goToPreviousScreen()
         }
     )
 

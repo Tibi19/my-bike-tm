@@ -3,22 +3,28 @@ package com.tam.mybike.ui.screen.settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tam.mybike.R
 import com.tam.mybike.domain.model.Bike
 import com.tam.mybike.domain.model.BikeType
 import com.tam.mybike.domain.model.Distance
 import com.tam.mybike.domain.model.DistanceUnit
 import com.tam.mybike.domain.model.WheelSize
 import com.tam.mybike.ui.component.ScreenDarkPreview
-import com.tam.mybike.ui.component.ScreenPreview
 import com.tam.mybike.ui.component.button.DefaultSwitch
 import com.tam.mybike.ui.component.field.ChoiceHolder
 import com.tam.mybike.ui.component.field.DropdownField
@@ -30,6 +36,8 @@ import com.tam.mybike.ui.theme.PADDING_MEDIUM
 import com.tam.mybike.ui.theme.PADDING_SMALL
 import com.tam.mybike.ui.theme.PADDING_X_SMALL
 import com.tam.mybike.ui.theme.PATTERN_REGEX_LETTERS
+import com.tam.mybike.ui.theme.SIZE_BIKE_CHOICE_ICON
+import com.tam.mybike.ui.theme.TEXT_BIKE_CHOICE_ICON_CONTENT
 import com.tam.mybike.ui.theme.TEXT_DEFAULT_BIKE
 import com.tam.mybike.ui.theme.TEXT_DISTANCE_UNITS
 import com.tam.mybike.ui.theme.TEXT_SERVICE_REMINDER
@@ -51,6 +59,7 @@ fun SettingsScreen(
         modifier = Modifier
             .background(color = MaterialTheme.colorScheme.surfaceVariant)
             .padding(horizontal = PADDING_MEDIUM, vertical = PADDING_SMALL)
+            .fillMaxSize()
     ) {
         Title(
             text = TEXT_SETTINGS,
@@ -74,23 +83,30 @@ fun SettingsScreen(
                 )
             },
             label = TEXT_DISTANCE_UNITS,
-            dropdownHorizontalPadding = PADDING_MEDIUM
+            dropdownHorizontalPadding = PADDING_MEDIUM,
+            modifier = Modifier.padding(bottom = PADDING_X_SMALL)
         )
 
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.padding(bottom = PADDING_X_SMALL)
+        ) {
             InputField(
                 value = "${state.reminderDistance.amount}${state.reminderDistance.unit.suffix}",
                 onValueChange = { newValue ->
-                    val newValueInt = newValue
+                    val newValueOnlyDigits = newValue
                         .replace(PATTERN_REGEX_LETTERS.toRegex(), "")
-                        .toInt()
+                    val newValueInt = if (newValueOnlyDigits.isEmpty()) 0 else newValueOnlyDigits.toInt()
                     val newDistance = Distance(newValueInt, state.reminderDistance.unit)
                     val reminderDistanceChangeEvent = SettingsEvent.OnReminderDistanceChange(newDistance)
                     onEvent(reminderDistanceChangeEvent)
                 },
+                keyboardOptions = KeyboardOptions.Default
+                    .copy(keyboardType = KeyboardType.Number),
                 label = TEXT_SERVICE_REMINDER,
                 isRequired = false,
-                modifier = Modifier.weight(WEIGHT_FILL)
+                modifier = Modifier
+                    .weight(WEIGHT_FILL)
             )
             DefaultSwitch(
                 isOn = state.isReminderOn,
@@ -122,8 +138,17 @@ fun SettingsScreen(
                     text = bike.name
                 )
             },
+            dropdownItemIcon = {
+                Icon(
+                    painter = painterResource(id = R.drawable.bike_placeholder),
+                    contentDescription = TEXT_BIKE_CHOICE_ICON_CONTENT,
+                    tint = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.size(SIZE_BIKE_CHOICE_ICON)
+                )
+            },
             label = TEXT_DEFAULT_BIKE,
-            dropdownHorizontalPadding = PADDING_MEDIUM
+            dropdownHorizontalPadding = PADDING_MEDIUM,
+            modifier = Modifier.padding(bottom = PADDING_X_SMALL)
         )
     }
 }

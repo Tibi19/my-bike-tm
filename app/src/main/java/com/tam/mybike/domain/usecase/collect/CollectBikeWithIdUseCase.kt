@@ -8,7 +8,7 @@ class CollectBikeWithIdUseCase @Inject constructor(
     private val repository: Repository
 ) {
 
-    suspend operator fun invoke(bikeId: Int, onCollect: (Bike) -> Unit) {
+    suspend operator fun invoke(bikeId: Int, onCollect: (Bike?) -> Unit) {
         if (bikeId < 0) return
         repository
             .getBikeWithIdFlow(bikeId)

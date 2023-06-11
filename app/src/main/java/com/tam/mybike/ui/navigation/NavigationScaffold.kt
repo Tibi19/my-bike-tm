@@ -19,7 +19,8 @@ fun NavigationScaffold() {
     ) { scaffoldPaddingValues ->
         MainNavGraph(
             navController = navController,
-            modifier = Modifier.padding(bottom = scaffoldPaddingValues.calculateBottomPadding())
+            modifier = Modifier
+                .padding(bottom = scaffoldPaddingValues.calculateBottomPadding())
         )
     }
 

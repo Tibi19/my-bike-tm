@@ -47,7 +47,7 @@ class RepositoryImpl @Inject constructor(
     override fun getRidesFlow(): Flow<List<Ride>> =
         databaseSource.getRidesFlow()
 
-    override fun getBikeWithIdFlow(bikeId: Int): Flow<Bike> =
+    override fun getBikeWithIdFlow(bikeId: Int): Flow<Bike?> =
         databaseSource.getBikeWithIdFlow(bikeId)
 
     override fun getRideWithIdFlow(rideId: Int): Flow<Ride> =

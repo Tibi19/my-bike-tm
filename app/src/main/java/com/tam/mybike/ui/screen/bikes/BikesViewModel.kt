@@ -46,6 +46,7 @@ class BikesViewModel @Inject constructor(
                 }
                 updateBikes(bikesWithSettingsUnit)
                 updateBikeToProgressMap(bikesWithSettingsUnit)
+                updateIsLoading()
             }
         }
 
@@ -61,6 +62,12 @@ class BikesViewModel @Inject constructor(
         }
         mutableState.update {
             it.copy(bikeToProgressMap = bikeToProgressMap)
+        }
+    }
+
+    private fun updateIsLoading() {
+        mutableState.update {
+            it.copy(isLoading = false)
         }
     }
 

@@ -17,6 +17,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -65,7 +66,7 @@ fun RidesScreen(
     stateFlow: StateFlow<RidesState>,
     onEvent: (RidesEvent) -> Unit,
     goToAddRide: () -> Unit,
-    goToEditRide: () -> Unit
+    goToEditRide: (Int) -> Unit
 ) {
     val state by stateFlow.collectAsStateWithLifecycle()
 
@@ -78,12 +79,15 @@ fun RidesScreen(
     var rideToDelete by remember { mutableStateOf<Ride?>(null) }
 
     LazyColumn(
-        modifier = Modifier
-            .padding(top = PADDING_SMALL)
-            .padding(horizontal = PADDING_MEDIUM)
+        modifier = Modifier.padding(horizontal = PADDING_MEDIUM)
     ) {
         item {
-            Row(modifier = Modifier.padding(bottom = PADDING_MEDIUM)) {
+            Row(
+                modifier = Modifier.padding(
+                    top = PADDING_SMALL,
+                    bottom = PADDING_MEDIUM
+                )
+            ) {
                 RowTitle(text = TEXT_RIDES)
                 AddButton(
                     elementTitle = TEXT_RIDE,
@@ -124,7 +128,7 @@ fun RidesScreen(
                         duration = ride.minutes.toDurationString(),
                         date = formatDate(ride.dateMillis)
                     ),
-                    onEditMenuOption = goToEditRide,
+                    onEditMenuOption = { goToEditRide(ride.id) },
                     onDeleteMenuOption = {
                         rideToDelete = ride
                         isDeleteDialogOpenState.value = true
@@ -163,10 +167,10 @@ private fun EmptyRidesScreen(goToAddRide: () -> Unit) =
             modifier = Modifier.fillMaxWidth()
         )
         Row(
-            horizontalArrangement = Arrangement.Center,
             modifier = Modifier
                 .padding(vertical = PADDING_LARGE)
                 .width(WIDTH_DOTTED_LINE * 2)
+                .align(Alignment.CenterHorizontally)
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.dotted_line),

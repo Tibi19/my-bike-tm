@@ -39,7 +39,7 @@ class AddRideViewModel @Inject constructor(
             }
         }
 
-    private fun updateSelectedBike(bike: Bike) {
+    private fun updateSelectedBike(bike: Bike?) {
         mutableState.update {
             it.copy(selectedBike = bike)
         }
